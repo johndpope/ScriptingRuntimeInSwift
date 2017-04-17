@@ -64,6 +64,8 @@ And the SeaTurtle runtime environment should have:
 - [ ] Clear canvas option
 - [ ] Printing support (both scripts and turtle graphics images)
 - [ ] Turtle graphics picture exports
+- [ ] A Tutorial
+- [ ] Built-in Examples
 
 ## Authorship and License
 
