@@ -30,10 +30,13 @@ Declare a loop that iterates N times.
 `END`
 End a subroutine declaration or loop.
 
-`NAME`
+`SET X N`
+Set a variable named X to value N.
+
+`CALL NAME`
 Call a subroutine named NAME.
 
-All numbers must be integers, and all subroutine names must start with a letter. For the context-free grammar of SeaTurtle, see the file `cfg.txt`. See some sample scripts in the directory `SeaTurtle Scripts`.
+All numbers must be integers. All subroutine and variable names must start with a letter. In the above, N can be an integer literal, previously declared variable, or arithmetic expression using the operators `+`, `-`, `*`, `/`, `^`, and parenthesis `( )`. For the context-free grammar of SeaTurtle, see the file `cfg.txt`. See some sample scripts in the directory `SeaTurtle Scripts`.
 
 ## Script Files
 Script files are just UTF-8 encoded plain text files with SeaTurtle commands. They have the extension `.seat`.
