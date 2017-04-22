@@ -30,19 +30,51 @@ public struct Sub: Statement {
     public let statementList: StatementList
 }
 
+public struct VarSet: Statement {
+    public let name: String
+    public let value: Expression
+}
+
 public struct SubCall: Statement {
     public let name: String
 }
 
 public struct Loop: Statement {
-    public let times: Int
+    public let times: Expression
     public let statementList: StatementList
 }
 
 public struct Turn: Statement {
-    let angle: Int
+    let angle: Expression
+    let negate: Bool
 }
 
-public struct Movement: Statement {
-    let distance: Int
+public struct Movement: Statement, CustomDebugStringConvertible {
+    let distance: Expression
+    let negate: Bool
+    public var debugDescription: String {
+        return "Movement of \(distance)"
+    }
 }
+
+public protocol Expression {}
+
+public struct BinaryOperation: Expression, CustomDebugStringConvertible {
+    let operation: Token
+    let left: Expression
+    let right: Expression
+    public var debugDescription: String {
+        return "\(operation) -> (\(left), \(right))"
+    }
+}
+
+public struct UnaryOperation: Expression, CustomDebugStringConvertible {
+    let operation: Token
+    let value: Expression
+    public var debugDescription: String {
+        return "\(operation) -> \(value)"
+    }
+}
+
+extension Int: Expression {}
+extension String: Expression {}

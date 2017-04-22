@@ -10,7 +10,6 @@
 		5578D45A1EA1F815005D2C27 /* DocRep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5578D4591EA1F815005D2C27 /* DocRep.swift */; };
 		5578D45D1EA3289E005D2C27 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5578D45C1EA3289E005D2C27 /* SpriteKit.framework */; };
 		5578D45F1EA32E46005D2C27 /* TurtleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5578D45E1EA32E46005D2C27 /* TurtleViewController.swift */; };
-		5578D4821EA34514005D2C27 /* Interpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5578D4811EA34514005D2C27 /* Interpreter.swift */; };
 		5578D4841EA3F726005D2C27 /* cfg.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5578D4831EA3F726005D2C27 /* cfg.txt */; };
 		5578D4861EA46BD1005D2C27 /* StringDoubleValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5578D4851EA46BD1005D2C27 /* StringDoubleValueTransformer.swift */; };
 		55959DE91EA087E2000E6039 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55959DE81EA087E2000E6039 /* AppDelegate.swift */; };
@@ -18,10 +17,58 @@
 		55959DED1EA087E2000E6039 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55959DEC1EA087E2000E6039 /* Document.swift */; };
 		55959DEF1EA087E2000E6039 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55959DEE1EA087E2000E6039 /* Assets.xcassets */; };
 		55959DF21EA087E2000E6039 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55959DF01EA087E2000E6039 /* Main.storyboard */; };
-		55959DFD1EA08843000E6039 /* Nodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55959DFA1EA08843000E6039 /* Nodes.swift */; };
-		55959DFE1EA08843000E6039 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55959DFB1EA08843000E6039 /* Parser.swift */; };
-		55959DFF1EA08843000E6039 /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55959DFC1EA08843000E6039 /* Tokenizer.swift */; };
+		55C4CD7F1EAA804B0091CB5D /* SeaTurtleEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C4CD761EAA804B0091CB5D /* SeaTurtleEngine.framework */; };
+		55C4CD861EAA804B0091CB5D /* SeaTurtleEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C4CD851EAA804B0091CB5D /* SeaTurtleEngineTests.swift */; };
+		55C4CD881EAA804B0091CB5D /* SeaTurtleEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 55C4CD781EAA804B0091CB5D /* SeaTurtleEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55C4CD8B1EAA804B0091CB5D /* SeaTurtleEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C4CD761EAA804B0091CB5D /* SeaTurtleEngine.framework */; };
+		55C4CD8C1EAA804B0091CB5D /* SeaTurtleEngine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55C4CD761EAA804B0091CB5D /* SeaTurtleEngine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		55C4CD941EAA81000091CB5D /* Nodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55959DFA1EA08843000E6039 /* Nodes.swift */; };
+		55C4CD951EAA81010091CB5D /* Nodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55959DFA1EA08843000E6039 /* Nodes.swift */; };
+		55C4CD961EAA81060091CB5D /* Interpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5578D4811EA34514005D2C27 /* Interpreter.swift */; };
+		55C4CD971EAA81060091CB5D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55959DFB1EA08843000E6039 /* Parser.swift */; };
+		55C4CD981EAA81060091CB5D /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55959DFC1EA08843000E6039 /* Tokenizer.swift */; };
+		55C4CD991EAA81060091CB5D /* Interpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5578D4811EA34514005D2C27 /* Interpreter.swift */; };
+		55C4CD9A1EAA81060091CB5D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55959DFB1EA08843000E6039 /* Parser.swift */; };
+		55C4CD9B1EAA81060091CB5D /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55959DFC1EA08843000E6039 /* Tokenizer.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		55C4CD801EAA804B0091CB5D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55959DDD1EA087E2000E6039 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55C4CD751EAA804B0091CB5D;
+			remoteInfo = SeaTurtleEngine;
+		};
+		55C4CD821EAA804B0091CB5D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55959DDD1EA087E2000E6039 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55959DE41EA087E2000E6039;
+			remoteInfo = SeaTurtle;
+		};
+		55C4CD891EAA804B0091CB5D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55959DDD1EA087E2000E6039 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55C4CD751EAA804B0091CB5D;
+			remoteInfo = SeaTurtleEngine;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		55C4CD921EAA804B0091CB5D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				55C4CD8C1EAA804B0091CB5D /* SeaTurtleEngine.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5578D4591EA1F815005D2C27 /* DocRep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocRep.swift; sourceTree = "<group>"; };
@@ -40,6 +87,12 @@
 		55959DFA1EA08843000E6039 /* Nodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Nodes.swift; path = ../../Sources/Nodes.swift; sourceTree = "<group>"; };
 		55959DFB1EA08843000E6039 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Parser.swift; path = ../../Sources/Parser.swift; sourceTree = "<group>"; };
 		55959DFC1EA08843000E6039 /* Tokenizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tokenizer.swift; path = ../../Sources/Tokenizer.swift; sourceTree = "<group>"; };
+		55C4CD761EAA804B0091CB5D /* SeaTurtleEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SeaTurtleEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		55C4CD781EAA804B0091CB5D /* SeaTurtleEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeaTurtleEngine.h; sourceTree = "<group>"; };
+		55C4CD791EAA804B0091CB5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55C4CD7E1EAA804B0091CB5D /* SeaTurtleEngineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeaTurtleEngineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		55C4CD851EAA804B0091CB5D /* SeaTurtleEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaTurtleEngineTests.swift; sourceTree = "<group>"; };
+		55C4CD871EAA804B0091CB5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,7 +100,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55C4CD8B1EAA804B0091CB5D /* SeaTurtleEngine.framework in Frameworks */,
 				5578D45D1EA3289E005D2C27 /* SpriteKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55C4CD721EAA804B0091CB5D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55C4CD7B1EAA804B0091CB5D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55C4CD7F1EAA804B0091CB5D /* SeaTurtleEngine.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +135,8 @@
 			isa = PBXGroup;
 			children = (
 				55959DE71EA087E2000E6039 /* SeaTurtle */,
+				55C4CD771EAA804B0091CB5D /* SeaTurtleEngine */,
+				55C4CD841EAA804B0091CB5D /* SeaTurtleEngineTests */,
 				55959DE61EA087E2000E6039 /* Products */,
 				5578D45B1EA3289D005D2C27 /* Frameworks */,
 			);
@@ -75,6 +146,8 @@
 			isa = PBXGroup;
 			children = (
 				55959DE51EA087E2000E6039 /* SeaTurtle.app */,
+				55C4CD761EAA804B0091CB5D /* SeaTurtleEngine.framework */,
+				55C4CD7E1EAA804B0091CB5D /* SeaTurtleEngineTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,7 +181,36 @@
 			name = Engine;
 			sourceTree = "<group>";
 		};
+		55C4CD771EAA804B0091CB5D /* SeaTurtleEngine */ = {
+			isa = PBXGroup;
+			children = (
+				55C4CD781EAA804B0091CB5D /* SeaTurtleEngine.h */,
+				55C4CD791EAA804B0091CB5D /* Info.plist */,
+			);
+			path = SeaTurtleEngine;
+			sourceTree = "<group>";
+		};
+		55C4CD841EAA804B0091CB5D /* SeaTurtleEngineTests */ = {
+			isa = PBXGroup;
+			children = (
+				55C4CD851EAA804B0091CB5D /* SeaTurtleEngineTests.swift */,
+				55C4CD871EAA804B0091CB5D /* Info.plist */,
+			);
+			path = SeaTurtleEngineTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		55C4CD731EAA804B0091CB5D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55C4CD881EAA804B0091CB5D /* SeaTurtleEngine.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		55959DE41EA087E2000E6039 /* SeaTurtle */ = {
@@ -118,15 +220,54 @@
 				55959DE11EA087E2000E6039 /* Sources */,
 				55959DE21EA087E2000E6039 /* Frameworks */,
 				55959DE31EA087E2000E6039 /* Resources */,
+				55C4CD921EAA804B0091CB5D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				55C4CD8A1EAA804B0091CB5D /* PBXTargetDependency */,
 			);
 			name = SeaTurtle;
 			productName = SeaTurtle;
 			productReference = 55959DE51EA087E2000E6039 /* SeaTurtle.app */;
 			productType = "com.apple.product-type.application";
+		};
+		55C4CD751EAA804B0091CB5D /* SeaTurtleEngine */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55C4CD911EAA804B0091CB5D /* Build configuration list for PBXNativeTarget "SeaTurtleEngine" */;
+			buildPhases = (
+				55C4CD711EAA804B0091CB5D /* Sources */,
+				55C4CD721EAA804B0091CB5D /* Frameworks */,
+				55C4CD731EAA804B0091CB5D /* Headers */,
+				55C4CD741EAA804B0091CB5D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SeaTurtleEngine;
+			productName = SeaTurtleEngine;
+			productReference = 55C4CD761EAA804B0091CB5D /* SeaTurtleEngine.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		55C4CD7D1EAA804B0091CB5D /* SeaTurtleEngineTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55C4CD931EAA804B0091CB5D /* Build configuration list for PBXNativeTarget "SeaTurtleEngineTests" */;
+			buildPhases = (
+				55C4CD7A1EAA804B0091CB5D /* Sources */,
+				55C4CD7B1EAA804B0091CB5D /* Frameworks */,
+				55C4CD7C1EAA804B0091CB5D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				55C4CD811EAA804B0091CB5D /* PBXTargetDependency */,
+				55C4CD831EAA804B0091CB5D /* PBXTargetDependency */,
+			);
+			name = SeaTurtleEngineTests;
+			productName = SeaTurtleEngineTests;
+			productReference = 55C4CD7E1EAA804B0091CB5D /* SeaTurtleEngineTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -142,6 +283,17 @@
 						CreatedOnToolsVersion = 8.3.1;
 						DevelopmentTeam = 59VX8JQ7R6;
 						ProvisioningStyle = Automatic;
+					};
+					55C4CD751EAA804B0091CB5D = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 59VX8JQ7R6;
+						ProvisioningStyle = Automatic;
+					};
+					55C4CD7D1EAA804B0091CB5D = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 59VX8JQ7R6;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 55959DE41EA087E2000E6039;
 					};
 				};
 			};
@@ -159,6 +311,8 @@
 			projectRoot = "";
 			targets = (
 				55959DE41EA087E2000E6039 /* SeaTurtle */,
+				55C4CD751EAA804B0091CB5D /* SeaTurtleEngine */,
+				55C4CD7D1EAA804B0091CB5D /* SeaTurtleEngineTests */,
 			);
 		};
 /* End PBXProject section */
@@ -174,6 +328,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		55C4CD741EAA804B0091CB5D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55C4CD7C1EAA804B0091CB5D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -181,20 +349,57 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5578D4821EA34514005D2C27 /* Interpreter.swift in Sources */,
 				5578D4861EA46BD1005D2C27 /* StringDoubleValueTransformer.swift in Sources */,
 				55959DEB1EA087E2000E6039 /* ViewController.swift in Sources */,
-				55959DFF1EA08843000E6039 /* Tokenizer.swift in Sources */,
 				55959DE91EA087E2000E6039 /* AppDelegate.swift in Sources */,
 				5578D45A1EA1F815005D2C27 /* DocRep.swift in Sources */,
 				5578D45F1EA32E46005D2C27 /* TurtleViewController.swift in Sources */,
-				55959DFE1EA08843000E6039 /* Parser.swift in Sources */,
 				55959DED1EA087E2000E6039 /* Document.swift in Sources */,
-				55959DFD1EA08843000E6039 /* Nodes.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55C4CD711EAA804B0091CB5D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55C4CD961EAA81060091CB5D /* Interpreter.swift in Sources */,
+				55C4CD981EAA81060091CB5D /* Tokenizer.swift in Sources */,
+				55C4CD941EAA81000091CB5D /* Nodes.swift in Sources */,
+				55C4CD971EAA81060091CB5D /* Parser.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55C4CD7A1EAA804B0091CB5D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55C4CD9A1EAA81060091CB5D /* Parser.swift in Sources */,
+				55C4CD9B1EAA81060091CB5D /* Tokenizer.swift in Sources */,
+				55C4CD991EAA81060091CB5D /* Interpreter.swift in Sources */,
+				55C4CD861EAA804B0091CB5D /* SeaTurtleEngineTests.swift in Sources */,
+				55C4CD951EAA81010091CB5D /* Nodes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		55C4CD811EAA804B0091CB5D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55C4CD751EAA804B0091CB5D /* SeaTurtleEngine */;
+			targetProxy = 55C4CD801EAA804B0091CB5D /* PBXContainerItemProxy */;
+		};
+		55C4CD831EAA804B0091CB5D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55959DE41EA087E2000E6039 /* SeaTurtle */;
+			targetProxy = 55C4CD821EAA804B0091CB5D /* PBXContainerItemProxy */;
+		};
+		55C4CD8A1EAA804B0091CB5D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55C4CD751EAA804B0091CB5D /* SeaTurtleEngine */;
+			targetProxy = 55C4CD891EAA804B0091CB5D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		55959DF01EA087E2000E6039 /* Main.storyboard */ = {
@@ -303,6 +508,7 @@
 		55959DF71EA087E2000E6039 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 59VX8JQ7R6;
@@ -317,6 +523,7 @@
 		55959DF81EA087E2000E6039 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 59VX8JQ7R6;
@@ -325,6 +532,84 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.oaksnow.SeaTurtle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		55C4CD8D1EAA804B0091CB5D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 59VX8JQ7R6;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = SeaTurtleEngine/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.oaksnow.SeaTurtleEngine;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		55C4CD8E1EAA804B0091CB5D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 59VX8JQ7R6;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = SeaTurtleEngine/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.oaksnow.SeaTurtleEngine;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		55C4CD8F1EAA804B0091CB5D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 59VX8JQ7R6;
+				INFOPLIST_FILE = SeaTurtleEngineTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.oaksnow.SeaTurtleEngineTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SeaTurtle.app/Contents/MacOS/SeaTurtle";
+			};
+			name = Debug;
+		};
+		55C4CD901EAA804B0091CB5D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 59VX8JQ7R6;
+				INFOPLIST_FILE = SeaTurtleEngineTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.oaksnow.SeaTurtleEngineTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SeaTurtle.app/Contents/MacOS/SeaTurtle";
 			};
 			name = Release;
 		};
@@ -348,6 +633,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		55C4CD911EAA804B0091CB5D /* Build configuration list for PBXNativeTarget "SeaTurtleEngine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55C4CD8D1EAA804B0091CB5D /* Debug */,
+				55C4CD8E1EAA804B0091CB5D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		55C4CD931EAA804B0091CB5D /* Build configuration list for PBXNativeTarget "SeaTurtleEngineTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55C4CD8F1EAA804B0091CB5D /* Debug */,
+				55C4CD901EAA804B0091CB5D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

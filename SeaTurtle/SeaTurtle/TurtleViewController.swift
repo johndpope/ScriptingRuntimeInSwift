@@ -19,6 +19,7 @@
 
 import Cocoa
 import SpriteKit
+import SeaTurtleEngine
 
 extension Int
 {
@@ -37,6 +38,7 @@ class TurtleViewController: NSViewController, TurtlePlayer {
     var steps: [SKAction] = [SKAction]()
     var curAngle: CGFloat = 90.deg2Rad
     var lookupTable: [String: StatementList] = [String: StatementList]()
+    var variableTable: [String: Int] = [String: Int]()
     
     let path = CGMutablePath()
     let line = SKShapeNode()

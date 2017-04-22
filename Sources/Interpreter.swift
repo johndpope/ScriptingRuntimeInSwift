@@ -19,8 +19,9 @@
 
 import Foundation
 
-protocol TurtlePlayer {
-    var lookupTable: [String : StatementList] {get set}
+public protocol TurtlePlayer {
+    var lookupTable: [String : StatementList] {get set} // subroutines
+    var variableTable: [String: Int] {get set} // variables
     func addTurn(angle: Int)
     func addMove(distance: Int)
     func play()
@@ -28,24 +29,65 @@ protocol TurtlePlayer {
 }
 
 extension TurtlePlayer {
-    mutating func interpret(statements: StatementList) {
+    public mutating func interpret(statements: StatementList) {
         for statement in statements {
             switch (statement) {
             case let turn as Turn:
-                addTurn(angle: turn.angle)
+                var angle = evaluate(expression: turn.angle)
+                if turn.negate { angle = -angle }
+                addTurn(angle: angle)
             case let move as Movement:
-                addMove(distance: move.distance)
+                var distance = evaluate(expression: move.distance)
+                if move.negate { distance = -distance }
+                addMove(distance: distance)
             case let subcall as SubCall:
                 interpret(statements: lookupTable[subcall.name]!)
             case let loop as Loop:
-                for _ in 0..<loop.times {
+                for _ in 0..<evaluate(expression: loop.times) {
                     interpret(statements: loop.statementList)
                 }
             case let subdec as Sub:
                 lookupTable[subdec.name] = subdec.statementList
+            case let varset as VarSet:
+                variableTable[varset.name] = evaluate(expression: varset.value)
             default:
                 break
             }
+        }
+    }
+    
+    public func evaluate(expression: Expression) -> Int {
+        switch expression {
+        case let binop as BinaryOperation:
+            switch binop.operation {
+            case .plus:
+                return evaluate(expression: binop.left) + evaluate(expression: binop.right)
+            case .minus:
+                return evaluate(expression: binop.left) - evaluate(expression: binop.right)
+            case .times:
+                return evaluate(expression: binop.left) * evaluate(expression: binop.right)
+            case .divide:
+                return evaluate(expression: binop.left) / evaluate(expression: binop.right)
+            case .power:
+                return Int(pow(Double(evaluate(expression: binop.left)), Double(evaluate(expression: binop.right))))
+            default:
+                return 0
+            }
+            
+        case let unop as UnaryOperation:
+            switch unop.operation {
+            case .minus:
+                return -evaluate(expression: unop.value)
+            default:
+                return 0
+            }
+        case let name as String:
+            // should check if variable actually in variableTable
+            return variableTable[name]!
+        case let num as Int:
+            return num
+        default:
+            return 0
         }
     }
 }

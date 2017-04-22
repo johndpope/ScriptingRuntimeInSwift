@@ -27,11 +27,20 @@ enum TokenizerError: Error {
 public enum Token {
     case sub
     case end
+    case call
+    case set
     case loop
     case left
     case right
     case forward
     case backward
+    case plus
+    case minus
+    case times
+    case divide
+    case power
+    case openparen
+    case closeparen
     case name(String)
     case num(Int)
 }
@@ -42,10 +51,19 @@ var conversions: [(String, (String) -> Token?)] =
      ("sub", { _ in .sub }),
      ("repeat", { _ in .loop }),
      ("end", { _ in .end }),
+     ("call", { _ in .call }),
+     ("set", { _ in .set }),
      ("left", { _ in .left }),
      ("right", { _ in .right }),
      ("forward", { _ in .forward }),
      ("backward", { _ in .backward }),
+     ("\\+", { _ in .plus }),
+     ("-", { _ in .minus }),
+     ("\\*", { _ in .times }),
+     ("/", { _ in .divide }),
+     ("\\^", { _ in .power }),
+     ("\\(", { _ in .openparen }),
+     ("\\)", { _ in .closeparen }),
      ("[a-zA-Z][a-zA-Z0-9]*", { str in .name(str) }),
      ("-?[0-9]+", { str in .num(Int(str)!) })]
 

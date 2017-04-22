@@ -1,10 +1,15 @@
 statementlist -> statement statementlist | empty
-statement -> subdec | movement | turn | subcall | statementlist | loop | empty
+statement -> subdec | vardec | movement | turn | subcall | statementlist | loop | empty
 subdec -> "sub" name statementlist "end"
-loop -> "repeat" num statementlist "end"
-subcall -> name
-movement -> "forward" num | "backward" num
-turn -> "left" num | "right" num
+vardec -> "set" name expr
+loop -> "repeat" expr statementlist "end"
+subcall -> "call" name
+movement -> "forward" expr | "backward" expr
+turn -> "left" expr | "right" expr
+expr -> term { ("+" | "-") term }
+term -> fact { ("*" | "/") fact }
+fact -> point { "^" point }
+point -> name | num | "(" expr ")" | "-" point
 name -> *alphanumeric_combo*
 num -> *integer*
 empty -> *empty*
