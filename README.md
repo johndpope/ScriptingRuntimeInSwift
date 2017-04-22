@@ -44,10 +44,12 @@ The files that compose the simple lexer, parser, and interpreter are in the dire
 
 ## Future Direction
 
+Checkmarks indicate this item is currently being worked on.
+
 The SeaTurtle scripting language will hopefully get:
 
-- [ ] Variable Declarations
-- [ ] Arithmetic Expressions
+- [X] Variable Declarations
+- [X] Arithmetic Expressions
 - [ ] Boolean Expressions
 - [ ] If-Statements
 - [ ] PENUP/PENDOWN
