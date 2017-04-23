@@ -51,13 +51,11 @@ Checkmarks indicate this item is currently being worked on.
 
 The SeaTurtle scripting language will hopefully get:
 
-- [X] Variable Declarations
-- [X] Arithmetic Expressions
-- [ ] Boolean Expressions
-- [ ] If-Statements
-- [ ] PENUP/PENDOWN
-- [ ] HOME (move turtle back to starting location)
-- [ ] COLOR C (change pen color)
+- [X] Boolean Expressions
+- [X] If-Statements
+- [X] PENUP/PENDOWN
+- [X] HOME (move turtle back to starting location)
+- [X] COLOR C (change pen color)
 
 And the SeaTurtle runtime environment should have:
 
@@ -66,7 +64,7 @@ And the SeaTurtle runtime environment should have:
 - [ ] Real-time reporting of syntax or parsing errors
 - [ ] Stepping through scripts forwards and backwards
 - [ ] Pausing execution
-- [ ] Clear canvas option
+- [X] Clear canvas option
 - [ ] Printing support (both scripts and turtle graphics images)
 - [ ] Turtle graphics picture exports
 - [ ] A Tutorial
