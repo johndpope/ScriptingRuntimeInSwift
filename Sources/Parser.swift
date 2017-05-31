@@ -33,7 +33,7 @@ public class Parser {
     }
     
     func parsePoint() -> Expression? {
-        print("parsing point of \(current)")
+        //print("parsing point of \(current)")
         switch current {
         case let .name(varname):
             index += 1
@@ -63,7 +63,7 @@ public class Parser {
     }
     
     func parseFactor() -> Expression? {
-        print("parsing factor of \(current)")
+        //print("parsing factor of \(current)")
         if let left = parsePoint() {
             if index >= tokens.count { return left } // incase expression is end
             switch current {
@@ -82,7 +82,7 @@ public class Parser {
     }
     
     func parseTerm() -> Expression? {
-        print("parsing term of \(current)")
+        //print("parsing term of \(current)")
         if let down = parseFactor() {
             var left = down
             outter: while true {
@@ -113,12 +113,12 @@ public class Parser {
     }
     
     func parseExpression() -> Expression? {
-        print("parsing expression of \(current)")
+        //print("parsing expression of \(current)")
         if let down = parseTerm() {
             var left = down
             outter: while true {
                 if index >= tokens.count { return left } // incase expression is end
-                print("current is \(current)")
+                //print("current is \(current)")
                 switch current {
                 case .plus:
                     index += 1

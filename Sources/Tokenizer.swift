@@ -19,8 +19,8 @@
 
 import Foundation
 
-enum TokenizerError: Error {
-    case UnexpectedSymbol
+public enum TokenizerError: Error {
+    case UnexpectedSymbol(closeTo: String)
 }
 
 // all possible token types
@@ -34,6 +34,9 @@ public enum Token {
     case right
     case forward
     case backward
+    case penup
+    case pendown
+    case home
     case plus
     case minus
     case times
@@ -47,7 +50,8 @@ public enum Token {
 
 // regular expression : how to tokenize
 var conversions: [(String, (String) -> Token?)] =
-    [("[ \t\n]", { _ in nil }),
+    [(";.*", { _ in nil }),  // comments
+     ("[ \t\n\r]", { _ in nil }),
      ("sub", { _ in .sub }),
      ("repeat", { _ in .loop }),
      ("end", { _ in .end }),
@@ -57,6 +61,9 @@ var conversions: [(String, (String) -> Token?)] =
      ("right", { _ in .right }),
      ("forward", { _ in .forward }),
      ("backward", { _ in .backward }),
+     ("penup", { _ in .penup }),
+     ("pendown", { _ in .pendown }),
+     ("home", { _ in .home }),
      ("\\+", { _ in .plus }),
      ("-", { _ in .minus }),
      ("\\*", { _ in .times }),
@@ -84,10 +91,8 @@ public func tokenize(text: String) throws -> [Token] {
             }
         }
         if !found {
-            throw TokenizerError.UnexpectedSymbol
+            throw TokenizerError.UnexpectedSymbol(closeTo: remaining)
         }
     }
     return tokens
 }
-
-let tokens = try! tokenize(text: " dog sub lkjsdf 54")

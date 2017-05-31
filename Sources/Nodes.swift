@@ -57,6 +57,10 @@ public struct Movement: Statement, CustomDebugStringConvertible {
     }
 }
 
+public struct Control: Statement {
+    let token: Token
+}
+
 public protocol Expression {}
 
 public struct BinaryOperation: Expression, CustomDebugStringConvertible {

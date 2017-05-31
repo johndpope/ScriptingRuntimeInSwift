@@ -65,12 +65,20 @@ class Document: NSDocument {
     @IBAction func runSeaTurtleScript(sender: Any) {
         Swift.print("runScript()")
         docRep.running = true
-        let tokenized = try! tokenize(text: docRep.text as String)
-        let parser = Parser(tokens: tokenized)
-        let parsed = parser.parse()
-        tvc?.clear()
-        tvc?.interpret(statements: parsed)
-        tvc?.play()
+        do {
+            let tokenized = try tokenize(text: docRep.text as String)
+            Swift.print(tokenized)
+            let parser = Parser(tokens: tokenized)
+            let parsed = parser.parse()
+            tvc?.clear()
+            tvc?.interpret(statements: parsed)
+            tvc?.play()
+        } catch TokenizerError.UnexpectedSymbol(let closeTo) {
+            Swift.print("Tokenizer error close to:\(closeTo)")
+        } catch {
+            Swift.print("Other error")
+        }
+        
     }
 
 

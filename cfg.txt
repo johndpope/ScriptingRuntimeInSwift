@@ -1,11 +1,12 @@
 statementlist -> statement statementlist | empty
-statement -> subdec | vardec | movement | turn | subcall | statementlist | loop | empty
+statement -> subdec | vardec | movement | turn | subcall | statementlist | loop | control | empty
 subdec -> "sub" name statementlist "end"
 vardec -> "set" name expr
 loop -> "repeat" expr statementlist "end"
 subcall -> "call" name
 movement -> "forward" expr | "backward" expr
 turn -> "left" expr | "right" expr
+control -> "penup" | "pendown" | "home" | "color" expr
 expr -> term { ("+" | "-") term }
 term -> fact { ("*" | "/") fact }
 fact -> point { "^" point }
