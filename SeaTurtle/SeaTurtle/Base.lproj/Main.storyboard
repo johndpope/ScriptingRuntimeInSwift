@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13168.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12118"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13168.3"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -665,13 +665,13 @@
             <objects>
                 <windowController storyboardIdentifier="Document Window Controller" id="jGA-0Y-lOj" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="Ckk-yw-fiv">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" unifiedTitleAndToolbar="YES"/>
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <toolbar key="toolbar" implicitIdentifier="BCEE9527-948A-490D-B860-57A3967C0C4E" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="phl-C7-9Dh">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="A90930E8-27F9-47A6-866C-3E2DDC87EF06" label="Play" paletteLabel="Play" tag="-1" image="turtle" autovalidates="NO" id="ahp-a1-yp4">
+                                <toolbarItem implicitItemIdentifier="A90930E8-27F9-47A6-866C-3E2DDC87EF06" label="Play" paletteLabel="Play" tag="-1" image="play" autovalidates="NO" id="ahp-a1-yp4">
                                     <connections>
                                         <action selector="runSeaTurtleScriptWithSender:" target="6f7-a7-6o1" id="G4R-Y6-Nl4"/>
                                     </connections>
@@ -722,6 +722,9 @@
                                 <toolbarItem reference="a3U-uD-WNx"/>
                             </defaultToolbarItems>
                         </toolbar>
+                        <connections>
+                            <outlet property="delegate" destination="jGA-0Y-lOj" id="bku-iG-d6M"/>
+                        </connections>
                     </window>
                     <connections>
                         <segue destination="Ak4-ML-rtU" kind="relationship" relationship="window.shadowedContentViewController" id="2bo-TE-CwF"/>
@@ -762,15 +765,19 @@
                     <splitView key="splitView" dividerStyle="thin" vertical="YES" id="mzv-QG-M6l">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <outlet property="delegate" destination="Ak4-ML-rtU" id="jiN-dm-H1l"/>
+                        </connections>
                     </splitView>
                     <connections>
+                        <outlet property="splitView" destination="mzv-QG-M6l" id="pgb-6O-ahW"/>
                         <segue destination="5gI-5U-AMq" kind="relationship" relationship="splitItems" id="RBz-0o-PMz"/>
                         <segue destination="A2n-PU-gup" kind="relationship" relationship="splitItems" id="xj9-XJ-sge"/>
                     </connections>
                 </splitViewController>
                 <customObject id="i36-2K-o6W" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="442"/>
+            <point key="canvasLocation" x="90" y="493"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -786,7 +793,7 @@
                                     <rect key="frame" x="1" y="1" width="463" height="362"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView importsGraphics="NO" richText="NO" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="Wj9-JA-82e">
+                                        <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="Wj9-JA-82e">
                                             <rect key="frame" x="0.0" y="0.0" width="463" height="362"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -843,10 +850,10 @@
                 </viewController>
                 <customObject id="N80-P8-bCd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="591" y="642"/>
+            <point key="canvasLocation" x="647" y="493"/>
         </scene>
     </scenes>
     <resources>
-        <image name="turtle" width="25" height="40"/>
+        <image name="play" width="63" height="73"/>
     </resources>
 </document>
