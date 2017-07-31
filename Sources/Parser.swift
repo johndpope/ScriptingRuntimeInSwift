@@ -219,6 +219,25 @@ public class Parser {
         return nil
     }
     
+    func parseControl() -> Control? {
+        if case .penup = current {
+            index += 1
+            return PenChange(down: false)
+        } else if case .pendown = current {
+            index += 1
+            return PenChange(down: true)
+        } else if case .home = current {
+            index += 1
+            return Home()
+        } else if case .color = current {
+            index += 1
+            if let expr = parseExpression() {
+                return ColorChange(number: expr)
+            }
+        }
+        return nil
+    }
+    
     func parseStatement() -> Statement? {
         switch current {
         case .sub:
@@ -237,6 +256,14 @@ public class Parser {
             return parseTurn()
         case .call:
             return parseSubCall()
+        case .home:
+            return parseControl()
+        case .penup:
+            return parseControl()
+        case .pendown:
+            return parseControl()
+        case .color:
+            return parseControl()
         default:
             return nil
         }

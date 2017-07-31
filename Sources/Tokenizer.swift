@@ -37,6 +37,7 @@ public enum Token {
     case penup
     case pendown
     case home
+    case color
     case plus
     case minus
     case times
@@ -64,6 +65,7 @@ var conversions: [(String, (String) -> Token?)] =
      ("penup", { _ in .penup }),
      ("pendown", { _ in .pendown }),
      ("home", { _ in .home }),
+     ("color", { _ in .color }),
      ("\\+", { _ in .plus }),
      ("-", { _ in .minus }),
      ("\\*", { _ in .times }),

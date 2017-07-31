@@ -37,39 +37,38 @@ class TurtleViewController: NSViewController, TurtlePlayer {
     }
     var steps: [SKAction] = [SKAction]()
     var curAngle: CGFloat = 90.deg2Rad
+    var penDown: Bool = true
+    var penColor: NSColor = .green
     var lookupTable: [String: StatementList] = [String: StatementList]()
     var variableTable: [String: Int] = [String: Int]()
     
-    let path = CGMutablePath()
-    let line = SKShapeNode()
+    var path = CGMutablePath()
+    var line = SKShapeNode()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        /*let skview = SKView(frame: view.bounds)
-        view.addSubview(skview)*/
         
         scene = SKScene(size: view.frame.size)
         scene?.scaleMode = .aspectFill
         scene?.backgroundColor = NSColor.blue
         (view as! SKView).presentScene(scene)
         scene?.addChild(turtle)
-        scene?.addChild(line)
         // setup initial turtle position
         turtle.position = CGPoint(x: (scene?.size.width)!/2, y: (scene?.size.height)!/2)
         turtle.zRotation = curAngle
         // setup line 
+        resetLine()
+    }
+    
+    private func resetLine() {
+        path = CGMutablePath()
+        line = SKShapeNode()
+        path.move(to: self.turtle.position)
         line.path = path
         line.lineWidth = 1.0
-        line.strokeColor = .green
         line.glowWidth = 0.1
-        path.move(to: turtle.position)
-        // little test
-        /*addTurn(angle: 45)
-        addMove(distance: 100)
-        addTurn(angle: -90)
-        addMove(distance: 50)
-        play()*/
+        scene?.addChild(line)
     }
     
     func addTurn(angle: Int) {
@@ -82,12 +81,49 @@ class TurtleViewController: NSViewController, TurtlePlayer {
         let dx = CGFloat(distance) * cos(curAngle)
         let dy = CGFloat(distance) * sin(curAngle)
         let action1 = SKAction.moveBy(x: dx, y: dy, duration: stepTime)
-        let action2 = SKAction.customAction(withDuration: 0.0) { (node, float) in
-            self.path.addLine(to: self.turtle.position)
-            self.line.path = self.path
+        let action2 = SKAction.customAction(withDuration: 0.0) { [unowned self, down = penDown, color = penColor, line = line, path = path](node, float) in
+            if down {
+                line.strokeColor = color
+                path.addLine(to: self.turtle.position)
+            } else {
+                path.move(to: self.turtle.position)
+            }
+            line.path = path
         }
         let combined = SKAction.sequence([action1, action2])
         steps.append(combined)
+    }
+    
+    func goHome() {
+        curAngle = 90.deg2Rad
+        let action1 = SKAction.move(to: CGPoint(x: (scene?.size.width)!/2, y: (scene?.size.height)!/2), duration: stepTime)
+        let action2 = SKAction.rotate(toAngle: curAngle, duration: stepTime, shortestUnitArc: true)
+        let action3 = SKAction.customAction(withDuration: 0.0) { [unowned self](node, float) in
+            self.path.move(to: self.turtle.position)
+        }
+        let combined = SKAction.sequence([action1, action2, action3])
+        steps.append(combined)
+    }
+    
+    func changePen(down: Bool) {
+        penDown = down
+    }
+    
+    func changeColor(color: Int) {
+        resetLine()
+        
+        switch color {
+        case 0:
+            penColor = .yellow
+        case 1:
+            penColor = .orange
+        case 2:
+            penColor = .red
+        case 3:
+            penColor = .magenta
+        default:
+            penColor = .green
+        }
     }
     
     func play() {

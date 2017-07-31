@@ -24,6 +24,9 @@ public protocol TurtlePlayer {
     var variableTable: [String: Int] {get set} // variables
     func addTurn(angle: Int)
     func addMove(distance: Int)
+    func goHome()
+    func changePen(down: Bool)
+    func changeColor(color: Int)
     func play()
     func clear()
 }
@@ -40,6 +43,12 @@ extension TurtlePlayer {
                 var distance = evaluate(expression: move.distance)
                 if move.negate { distance = -distance }
                 addMove(distance: distance)
+            case _ as Home:
+                goHome()
+            case let penchange as PenChange:
+                changePen(down: penchange.down)
+            case let colorchange as ColorChange:
+                changeColor(color: evaluate(expression: colorchange.number))
             case let subcall as SubCall:
                 interpret(statements: lookupTable[subcall.name]!)
             case let loop as Loop:

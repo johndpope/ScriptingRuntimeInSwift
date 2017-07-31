@@ -57,8 +57,16 @@ public struct Movement: Statement, CustomDebugStringConvertible {
     }
 }
 
-public struct Control: Statement {
-    let token: Token
+public protocol Control: Statement {}
+
+public struct PenChange: Control {
+    let down: Bool
+}
+
+public struct Home: Control {}
+
+public struct ColorChange: Control {
+    let number: Expression
 }
 
 public protocol Expression {}
