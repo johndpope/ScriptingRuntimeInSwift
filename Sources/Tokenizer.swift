@@ -38,6 +38,13 @@ public enum Token {
     case pendown
     case home
     case color
+    case ifstart
+    case equal
+    case notequal
+    case lessthan
+    case lessthanequal
+    case greaterthan
+    case greaterthanequal
     case plus
     case minus
     case times
@@ -66,6 +73,12 @@ var conversions: [(String, (String) -> Token?)] =
      ("pendown", { _ in .pendown }),
      ("home", { _ in .home }),
      ("color", { _ in .color }),
+     ("if", { _ in .ifstart }),
+     ("!=", { _ in .notequal }),
+     ("<=", { _ in .lessthanequal }),
+     (">=", { _ in .greaterthanequal }),
+     ("<", { _ in .lessthan }),
+     (">", { _ in .greaterthan }),
      ("\\+", { _ in .plus }),
      ("-", { _ in .minus }),
      ("\\*", { _ in .times }),

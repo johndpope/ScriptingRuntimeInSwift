@@ -140,9 +140,26 @@ public class Parser {
             }
             return left
         }
-        print("couldn't parse term from expression")
+        print("Couldn't parse term from expression.")
         return nil
         
+    }
+    
+    func parseBooleanExpression() -> BooleanExpression? {
+        if let left = parseExpression() {
+            switch current {
+            case .equal, .notequal, .lessthan, .lessthanequal, .greaterthan, .greaterthanequal:
+                    let operation = current
+                    index += 1
+                    if let right = parseExpression() {
+                        return BooleanExpression(operation: operation, left: left, right: right)
+                    }
+            default:
+                print("Unexpected operator in middle of boolean expression.")
+            }
+        }
+        print("Couldn't parse boolean expression.")
+        return nil
     }
     
     func parseSubDec() -> Sub? {
@@ -238,6 +255,21 @@ public class Parser {
         return nil
     }
     
+    func parseIfStatement() -> IfStatement? {
+        if case .ifstart = current {
+            index += 1
+            if let boolExpr = parseBooleanExpression() {
+                let statements = parseStatementList()
+                if case .end = current {
+                    index += 1 // for end
+                    return IfStatement(booleanExpression: boolExpr, statementList: statements)
+                }
+            }
+        }
+        
+        return nil
+    }
+    
     func parseStatement() -> Statement? {
         switch current {
         case .sub:
@@ -264,6 +296,8 @@ public class Parser {
             return parseControl()
         case .color:
             return parseControl()
+        case .ifstart:
+            return parseIfStatement()
         default:
             return nil
         }

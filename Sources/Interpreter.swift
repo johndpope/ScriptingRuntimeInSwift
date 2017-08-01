@@ -59,9 +59,35 @@ extension TurtlePlayer {
                 lookupTable[subdec.name] = subdec.statementList
             case let varset as VarSet:
                 variableTable[varset.name] = evaluate(expression: varset.value)
+            case let ifstatement as IfStatement:
+                if evaluate(booleanExpression: ifstatement.booleanExpression) {
+                    interpret(statements: ifstatement.statementList)
+                }
             default:
                 break
             }
+        }
+    }
+    
+    public func evaluate(booleanExpression: BooleanExpression) -> Bool {
+        let leftValue = evaluate(expression: booleanExpression.left)
+        let rightValue = evaluate(expression: booleanExpression.right)
+        switch booleanExpression.operation {
+        case .equal:
+            return leftValue == rightValue
+        case .notequal:
+            return leftValue != rightValue
+        case .lessthan:
+            return leftValue < rightValue
+        case .lessthanequal:
+            return leftValue <= rightValue
+        case .greaterthan:
+            return leftValue > rightValue
+        case .greaterthanequal:
+            return leftValue >= rightValue
+        default:
+            print("Unexpected boolean expression operator \(booleanExpression.operation) interpretted.")
+            return false
         }
     }
     

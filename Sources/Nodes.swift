@@ -69,6 +69,20 @@ public struct ColorChange: Control {
     let number: Expression
 }
 
+public struct IfStatement: Statement {
+    let booleanExpression: BooleanExpression
+    let statementList: StatementList
+}
+
+public struct BooleanExpression: CustomDebugStringConvertible {
+    let operation: Token
+    let left: Expression
+    let right: Expression
+    public var debugDescription: String {
+        return "\(operation) -> (\(left), \(right))"
+    }
+}
+
 public protocol Expression {}
 
 public struct BinaryOperation: Expression, CustomDebugStringConvertible {
