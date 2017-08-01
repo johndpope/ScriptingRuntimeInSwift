@@ -74,6 +74,7 @@ var conversions: [(String, (String) -> Token?)] =
      ("home", { _ in .home }),
      ("color", { _ in .color }),
      ("if", { _ in .ifstart }),
+     ("=", { _ in .equal }),
      ("!=", { _ in .notequal }),
      ("<=", { _ in .lessthanequal }),
      (">=", { _ in .greaterthanequal }),
