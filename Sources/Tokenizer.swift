@@ -99,8 +99,8 @@ public func tokenize(text: String) throws -> [Token] {
             // ^ is for matching at the start of the string
             if let foundRange = remaining.range(of: "^\(regExpStr)", options: [.regularExpression, .caseInsensitive]) {
                 found = true
-                let foundString = remaining.substring(with: foundRange)
-                if let token = creator(foundString) {
+                let foundString = remaining[foundRange]
+                if let token = creator(String(foundString)) {
                     tokens.append(token)
                 }
                 remaining.removeSubrange(foundRange)

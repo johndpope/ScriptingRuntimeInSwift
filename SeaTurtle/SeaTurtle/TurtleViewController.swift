@@ -127,6 +127,10 @@ class TurtleViewController: NSViewController, TurtlePlayer {
     }
     
     func play() {
+        guard !turtle.isPaused else {
+            turtle.isPaused = false
+            return
+        }
         let action = SKAction.sequence(steps)
         turtle.run(action)
         /*for action in steps {
@@ -134,6 +138,10 @@ class TurtleViewController: NSViewController, TurtlePlayer {
                 self.path.addLine(to: self.turtle.position)
             }
         }*/
+    }
+    
+    func pause() {
+        turtle.isPaused = true
     }
     
     func clear() {

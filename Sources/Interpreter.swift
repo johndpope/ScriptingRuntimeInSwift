@@ -28,6 +28,7 @@ public protocol TurtlePlayer {
     func changePen(down: Bool)
     func changeColor(color: Int)
     func play()
+    func pause()
     func clear()
 }
 

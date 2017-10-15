@@ -62,7 +62,13 @@ class Document: NSDocument {
         docRep.text = NSString(data: data, encoding: String.Encoding.utf8.rawValue)!
     }
     
-    @IBAction func runSeaTurtleScript(sender: Any) {
+    @IBAction func runSeaTurtleScript(sender: NSToolbarItem) {
+        guard sender.label == "Play" else {
+            tvc?.pause()
+            sender.image = #imageLiteral(resourceName: "play")
+            sender.label = "Play"
+            return
+        }
         Swift.print("runScript()")
         docRep.running = true
         do {
@@ -78,9 +84,9 @@ class Document: NSDocument {
         } catch {
             Swift.print("Other error")
         }
-        
+        sender.image = #imageLiteral(resourceName: "pause")
+        sender.label = "Pause"
     }
-
 
 }
 
