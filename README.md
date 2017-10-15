@@ -27,8 +27,11 @@ Declare a subroutine named NAME.
 `REPEAT N`
 Declare a loop that iterates N times.
 
+`IF BOOLEAN_EXPRESSION`
+Start an if statement. The boolean expression can be a single comparison using =, !=, <, <=, >, or >=.
+
 `END`
-End a subroutine declaration or loop.
+End a subroutine declaration, if statement, or loop.
 
 `SET X N`
 Set a variable named X to value N.
@@ -65,8 +68,7 @@ Checkmarks indicate this item is currently being worked on.
 
 The SeaTurtle scripting language will hopefully get:
 
-- [X] Boolean Expressions
-- [X] If-Statements
+- [ ] Random Numbers
 
 And the SeaTurtle runtime environment should have:
 
