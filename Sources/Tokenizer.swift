@@ -93,7 +93,7 @@ var conversions: [(String, (String) -> Token?)] =
 public func tokenize(text: String) throws -> [Token] {
     var tokens: [Token] = [Token]()
     var remaining = text
-    while remaining.characters.count > 0 {
+    while remaining.count > 0 {
         var found = false
         for (regExpStr, creator) in conversions {
             // ^ is for matching at the start of the string

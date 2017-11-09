@@ -49,16 +49,22 @@ class TurtleViewController: NSViewController, TurtlePlayer {
         super.viewDidLoad()
         // Do view setup here.
         
+        // setup scene
         scene = SKScene(size: view.frame.size)
         scene?.scaleMode = .aspectFill
         scene?.backgroundColor = NSColor.blue
         (view as! SKView).presentScene(scene)
-        scene?.addChild(turtle)
-        // setup initial turtle position
+        
+        // reset turtle, lines
+        clear()
+    }
+    
+    private func resetTurtle() {
+        turtle = SKSpriteNode(imageNamed: "turtle")
+        curAngle = 90.deg2Rad
         turtle.position = CGPoint(x: (scene?.size.width)!/2, y: (scene?.size.height)!/2)
         turtle.zRotation = curAngle
-        // setup line 
-        resetLine()
+        scene?.addChild(turtle)
     }
     
     private func resetLine() {
@@ -147,6 +153,9 @@ class TurtleViewController: NSViewController, TurtlePlayer {
     func clear() {
         lookupTable.removeAll()
         steps.removeAll()
+        scene?.removeAllChildren()
+        resetTurtle()
+        resetLine()
     }
     
 }
