@@ -63,12 +63,22 @@ class Document: NSDocument {
     }
     
     @IBAction func runSeaTurtleScript(sender: NSToolbarItem) {
-        guard sender.label == "Play" else {
+        guard sender.label == "Play" else { // hit pause
             tvc?.pause()
             sender.image = #imageLiteral(resourceName: "play")
             sender.label = "Play"
             return
         }
+        // hit play
+        sender.image = #imageLiteral(resourceName: "pause")
+        sender.label = "Pause"
+        
+        if docRep.running { // already running
+            tvc?.play()
+            return
+        }
+        
+        // first run
         Swift.print("runScript()")
         docRep.running = true
         do {
@@ -84,8 +94,6 @@ class Document: NSDocument {
         } catch {
             Swift.print("Other error")
         }
-        sender.image = #imageLiteral(resourceName: "pause")
-        sender.label = "Pause"
     }
 
 }
