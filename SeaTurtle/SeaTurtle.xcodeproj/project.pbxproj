@@ -17,6 +17,7 @@
 		55959DED1EA087E2000E6039 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55959DEC1EA087E2000E6039 /* Document.swift */; };
 		55959DEF1EA087E2000E6039 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55959DEE1EA087E2000E6039 /* Assets.xcassets */; };
 		55959DF21EA087E2000E6039 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55959DF01EA087E2000E6039 /* Main.storyboard */; };
+		559BF92C201EC47500864319 /* LineNumberRulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559BF92B201EC47500864319 /* LineNumberRulerView.swift */; };
 		55C4CD7F1EAA804B0091CB5D /* SeaTurtleEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C4CD761EAA804B0091CB5D /* SeaTurtleEngine.framework */; };
 		55C4CD861EAA804B0091CB5D /* SeaTurtleEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C4CD851EAA804B0091CB5D /* SeaTurtleEngineTests.swift */; };
 		55C4CD881EAA804B0091CB5D /* SeaTurtleEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 55C4CD781EAA804B0091CB5D /* SeaTurtleEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -30,6 +31,7 @@
 		55C4CD991EAA81060091CB5D /* Interpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5578D4811EA34514005D2C27 /* Interpreter.swift */; };
 		55C4CD9A1EAA81060091CB5D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55959DFB1EA08843000E6039 /* Parser.swift */; };
 		55C4CD9B1EAA81060091CB5D /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55959DFC1EA08843000E6039 /* Tokenizer.swift */; };
+		55D1C92E201EE17100C7783A /* TextViewLineNumberExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D1C92D201EE17000C7783A /* TextViewLineNumberExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,12 +89,14 @@
 		55959DFA1EA08843000E6039 /* Nodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Nodes.swift; path = ../../Sources/Nodes.swift; sourceTree = "<group>"; };
 		55959DFB1EA08843000E6039 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Parser.swift; path = ../../Sources/Parser.swift; sourceTree = "<group>"; };
 		55959DFC1EA08843000E6039 /* Tokenizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tokenizer.swift; path = ../../Sources/Tokenizer.swift; sourceTree = "<group>"; };
+		559BF92B201EC47500864319 /* LineNumberRulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineNumberRulerView.swift; sourceTree = "<group>"; };
 		55C4CD761EAA804B0091CB5D /* SeaTurtleEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SeaTurtleEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C4CD781EAA804B0091CB5D /* SeaTurtleEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeaTurtleEngine.h; sourceTree = "<group>"; };
 		55C4CD791EAA804B0091CB5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55C4CD7E1EAA804B0091CB5D /* SeaTurtleEngineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeaTurtleEngineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C4CD851EAA804B0091CB5D /* SeaTurtleEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaTurtleEngineTests.swift; sourceTree = "<group>"; };
 		55C4CD871EAA804B0091CB5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55D1C92D201EE17000C7783A /* TextViewLineNumberExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewLineNumberExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +163,8 @@
 				55959DF91EA08833000E6039 /* Engine */,
 				55959DE81EA087E2000E6039 /* AppDelegate.swift */,
 				55959DEA1EA087E2000E6039 /* SourceCodeViewController.swift */,
+				559BF92B201EC47500864319 /* LineNumberRulerView.swift */,
+				55D1C92D201EE17000C7783A /* TextViewLineNumberExtension.swift */,
 				55959DEC1EA087E2000E6039 /* Document.swift */,
 				5578D4591EA1F815005D2C27 /* DocRep.swift */,
 				5578D45E1EA32E46005D2C27 /* TurtleViewController.swift */,
@@ -354,9 +360,11 @@
 			files = (
 				5578D4861EA46BD1005D2C27 /* StringDoubleValueTransformer.swift in Sources */,
 				55959DEB1EA087E2000E6039 /* SourceCodeViewController.swift in Sources */,
+				559BF92C201EC47500864319 /* LineNumberRulerView.swift in Sources */,
 				55959DE91EA087E2000E6039 /* AppDelegate.swift in Sources */,
 				5578D45A1EA1F815005D2C27 /* DocRep.swift in Sources */,
 				5578D45F1EA32E46005D2C27 /* TurtleViewController.swift in Sources */,
+				55D1C92E201EE17100C7783A /* TextViewLineNumberExtension.swift in Sources */,
 				55959DED1EA087E2000E6039 /* Document.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -612,7 +620,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oaksnow.SeaTurtleEngineTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SeaTurtle.app/Contents/MacOS/SeaTurtle";
 			};
@@ -628,7 +636,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oaksnow.SeaTurtleEngineTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SeaTurtle.app/Contents/MacOS/SeaTurtle";
 			};

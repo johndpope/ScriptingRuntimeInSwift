@@ -1,8 +1,8 @@
 //
-//  SourceCodeViewController.swift
+//  TextViewLineNumberExtension.swift
 //
 //  SeaTurtle - A turtle graphics scripting language and runtime.
-//  Copyright (C) 2017 David Kopec
+//  Copyright (C) 2018 David Kopec
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -17,28 +17,14 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import Foundation
 import Cocoa
 
-class SourceCodeViewController: NSViewController {
-    
-    @IBOutlet weak var textView: NSTextView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        // Setup Line Numbers
-        textView.enclosingScrollView?.verticalRulerView = LineNumberRulerView(textView: textView)
-        textView.enclosingScrollView?.hasVerticalRuler = true
-        textView.enclosingScrollView?.rulersVisible = true
+extension NSTextView {
+    /// Find a line number for a character at a particular index
+    func lineNumber(at index: Int) -> Int {
+        guard let textStorage = self.textStorage else { return 0 }
+        let upTo = textStorage.string.prefix(index)
+        return upTo.components(separatedBy: "\n").count
     }
-
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
-
-
 }
-
