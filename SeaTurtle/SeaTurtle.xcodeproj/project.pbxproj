@@ -13,7 +13,7 @@
 		5578D4841EA3F726005D2C27 /* cfg.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5578D4831EA3F726005D2C27 /* cfg.txt */; };
 		5578D4861EA46BD1005D2C27 /* StringDoubleValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5578D4851EA46BD1005D2C27 /* StringDoubleValueTransformer.swift */; };
 		55959DE91EA087E2000E6039 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55959DE81EA087E2000E6039 /* AppDelegate.swift */; };
-		55959DEB1EA087E2000E6039 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55959DEA1EA087E2000E6039 /* ViewController.swift */; };
+		55959DEB1EA087E2000E6039 /* SourceCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55959DEA1EA087E2000E6039 /* SourceCodeViewController.swift */; };
 		55959DED1EA087E2000E6039 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55959DEC1EA087E2000E6039 /* Document.swift */; };
 		55959DEF1EA087E2000E6039 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55959DEE1EA087E2000E6039 /* Assets.xcassets */; };
 		55959DF21EA087E2000E6039 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55959DF01EA087E2000E6039 /* Main.storyboard */; };
@@ -79,7 +79,7 @@
 		5578D4851EA46BD1005D2C27 /* StringDoubleValueTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringDoubleValueTransformer.swift; sourceTree = "<group>"; };
 		55959DE51EA087E2000E6039 /* SeaTurtle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeaTurtle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55959DE81EA087E2000E6039 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		55959DEA1EA087E2000E6039 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		55959DEA1EA087E2000E6039 /* SourceCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceCodeViewController.swift; sourceTree = "<group>"; };
 		55959DEC1EA087E2000E6039 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		55959DEE1EA087E2000E6039 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		55959DF11EA087E2000E6039 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -158,7 +158,7 @@
 				5578D4831EA3F726005D2C27 /* cfg.txt */,
 				55959DF91EA08833000E6039 /* Engine */,
 				55959DE81EA087E2000E6039 /* AppDelegate.swift */,
-				55959DEA1EA087E2000E6039 /* ViewController.swift */,
+				55959DEA1EA087E2000E6039 /* SourceCodeViewController.swift */,
 				55959DEC1EA087E2000E6039 /* Document.swift */,
 				5578D4591EA1F815005D2C27 /* DocRep.swift */,
 				5578D45E1EA32E46005D2C27 /* TurtleViewController.swift */,
@@ -353,7 +353,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5578D4861EA46BD1005D2C27 /* StringDoubleValueTransformer.swift in Sources */,
-				55959DEB1EA087E2000E6039 /* ViewController.swift in Sources */,
+				55959DEB1EA087E2000E6039 /* SourceCodeViewController.swift in Sources */,
 				55959DE91EA087E2000E6039 /* AppDelegate.swift in Sources */,
 				5578D45A1EA1F815005D2C27 /* DocRep.swift in Sources */,
 				5578D45F1EA32E46005D2C27 /* TurtleViewController.swift in Sources */,

@@ -19,7 +19,7 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
+class SourceCodeViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
