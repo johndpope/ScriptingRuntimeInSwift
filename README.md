@@ -73,7 +73,6 @@ The SeaTurtle scripting language will hopefully get:
 And the SeaTurtle runtime environment should have:
 
 - [ ] Syntax Highlighting/Coloring
-- [ ] Display of line numbers
 - [ ] Real-time reporting of syntax or parsing errors
 - [ ] Stepping through scripts forwards and backwards
 - [ ] Pausing execution
