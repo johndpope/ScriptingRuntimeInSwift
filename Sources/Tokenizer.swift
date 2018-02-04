@@ -19,95 +19,115 @@
 
 import Foundation
 
-public enum TokenizerError: Error {
-    case UnexpectedSymbol(closeTo: String)
+public enum TokenizerError: Error, LocalizedError {
+    case UnexpectedSymbol(lineNumber: Int, closeTo: String)
+    
+    public var errorDescription: String? {
+        switch self {
+        case .UnexpectedSymbol(let lineNumber, let closeTo):
+            return "Unexpected symbol at line \(lineNumber) close to:\(closeTo)"
+        }
+    }
 }
 
-// all possible token types
+// All possible token types
+// Each token has an associated type that indicates the range where the token was found
+// in the original program's text
+// This is useful for debugging
 public enum Token {
-    case sub
-    case end
-    case call
-    case set
-    case loop
-    case left
-    case right
-    case forward
-    case backward
-    case penup
-    case pendown
-    case home
-    case color
-    case ifstart
-    case equal
-    case notequal
-    case lessthan
-    case lessthanequal
-    case greaterthan
-    case greaterthanequal
-    case plus
-    case minus
-    case times
-    case divide
-    case power
-    case openparen
-    case closeparen
-    case name(String)
-    case num(Int)
+    case sub(Range<String.Index>)
+    case end(Range<String.Index>)
+    case call(Range<String.Index>)
+    case set(Range<String.Index>)
+    case loop(Range<String.Index>)
+    case left(Range<String.Index>)
+    case right(Range<String.Index>)
+    case forward(Range<String.Index>)
+    case backward(Range<String.Index>)
+    case penup(Range<String.Index>)
+    case pendown(Range<String.Index>)
+    case home(Range<String.Index>)
+    case color(Range<String.Index>)
+    case ifstart(Range<String.Index>)
+    case equal(Range<String.Index>)
+    case notequal(Range<String.Index>)
+    case lessthan(Range<String.Index>)
+    case lessthanequal(Range<String.Index>)
+    case greaterthan(Range<String.Index>)
+    case greaterthanequal(Range<String.Index>)
+    case plus(Range<String.Index>)
+    case minus(Range<String.Index>)
+    case times(Range<String.Index>)
+    case divide(Range<String.Index>)
+    case power(Range<String.Index>)
+    case openparen(Range<String.Index>)
+    case closeparen(Range<String.Index>)
+    case name(Range<String.Index>, String)
+    case num(Range<String.Index>, Int)
 }
 
 // regular expression : how to tokenize
-var conversions: [(String, (String) -> Token?)] =
-    [(";.*", { _ in nil }),  // comments
-     ("[ \t\n\r]", { _ in nil }),
-     ("sub", { _ in .sub }),
-     ("repeat", { _ in .loop }),
-     ("end", { _ in .end }),
-     ("call", { _ in .call }),
-     ("set", { _ in .set }),
-     ("left", { _ in .left }),
-     ("right", { _ in .right }),
-     ("forward", { _ in .forward }),
-     ("backward", { _ in .backward }),
-     ("penup", { _ in .penup }),
-     ("pendown", { _ in .pendown }),
-     ("home", { _ in .home }),
-     ("color", { _ in .color }),
-     ("if", { _ in .ifstart }),
-     ("=", { _ in .equal }),
-     ("!=", { _ in .notequal }),
-     ("<=", { _ in .lessthanequal }),
-     (">=", { _ in .greaterthanequal }),
-     ("<", { _ in .lessthan }),
-     (">", { _ in .greaterthan }),
-     ("\\+", { _ in .plus }),
-     ("-", { _ in .minus }),
-     ("\\*", { _ in .times }),
-     ("/", { _ in .divide }),
-     ("\\^", { _ in .power }),
-     ("\\(", { _ in .openparen }),
-     ("\\)", { _ in .closeparen }),
-     ("[a-zA-Z][a-zA-Z0-9]*", { str in .name(str) }),
-     ("-?[0-9]+", { str in .num(Int(str)!) })]
+var conversions: [(String, (Range<String.Index>, String) -> Token?)] =
+    [(";.*", { _,_ in nil }),  // comments
+     ("[ \t\n\r]", { _,_ in nil }),
+     ("sub", { r,_ in .sub(r) }),
+     ("repeat", { r,_ in .loop(r) }),
+     ("end", { r,_ in .end(r) }),
+     ("call", { r,_ in .call(r) }),
+     ("set", { r,_ in .set(r) }),
+     ("left", { r,_ in .left(r) }),
+     ("right", { r,_ in .right(r) }),
+     ("forward", { r,_ in .forward(r) }),
+     ("backward", { r,_ in .backward(r) }),
+     ("penup", { r,_ in .penup(r) }),
+     ("pendown", { r,_ in .pendown(r) }),
+     ("home", { r,_ in .home(r) }),
+     ("color", { r,_ in .color(r) }),
+     ("if", { r,_ in .ifstart(r) }),
+     ("=", { r,_ in .equal(r) }),
+     ("!=", { r,_ in .notequal(r) }),
+     ("<=", { r,_ in .lessthanequal(r) }),
+     (">=", { r,_ in .greaterthanequal(r) }),
+     ("<", { r,_ in .lessthan(r) }),
+     (">", { r,_ in .greaterthan(r) }),
+     ("\\+", { r,_ in .plus(r) }),
+     ("-", { r,_ in .minus(r) }),
+     ("\\*", { r,_ in .times(r) }),
+     ("/", { r,_ in .divide(r) }),
+     ("\\^", { r,_ in .power(r) }),
+     ("\\(", { r,_ in .openparen(r) }),
+     ("\\)", { r,_ in .closeparen(r) }),
+     ("[a-zA-Z][a-zA-Z0-9]*", { r,str in .name(r, str) }),
+     ("-?[0-9]+", { r,str in .num(r, Int(str)!) })]
 
 public func tokenize(text: String) throws -> [Token] {
     var tokens: [Token] = [Token]()
     var remaining = text
+    var tokenRange: Range<String.Index> = text.startIndex..<text.startIndex
     while remaining.count > 0 {
         var found = false
         for (regExpStr, creator) in conversions {
             // ^ is for matching at the start of the string
             if let foundRange = remaining.range(of: "^\(regExpStr)", options: [.regularExpression, .caseInsensitive]) {
                 found = true
+                let distance = remaining.distance(from: foundRange.lowerBound, to: foundRange.upperBound)
+                let sie: String.Index = text.index(tokenRange.upperBound, offsetBy: distance)
+                tokenRange = tokenRange.upperBound..<sie
                 let foundString = remaining[foundRange]
-                if let token = creator(String(foundString)) {
+                if let token = creator(tokenRange, String(foundString)) {
                     tokens.append(token)
                 }
+                
                 remaining.removeSubrange(foundRange)
             }
         }
         if !found {
-            throw TokenizerError.UnexpectedSymbol(closeTo: remaining)
+            // get line of error
+            let rangeBefore = text.startIndex...tokenRange.upperBound
+            let textUpTo = String(text[rangeBefore])
+            let lineNumber = textUpTo.split(separator: "\n", omittingEmptySubsequences: false).count
+            let closeTo = String(remaining.split(separator: "\n").first!)
+            throw TokenizerError.UnexpectedSymbol(lineNumber: lineNumber, closeTo: closeTo)
         }
     }
     return tokens

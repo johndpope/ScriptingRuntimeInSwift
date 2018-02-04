@@ -23,6 +23,7 @@ import SeaTurtleEngine
 class Document: NSDocument {
     @objc var docRep: DocRep = DocRep()
     weak var tvc: TurtleViewController?
+    weak var scvc: SourceCodeViewController?
 
     override init() {
         super.init()
@@ -38,6 +39,7 @@ class Document: NSDocument {
         let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
         let windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Document Window Controller")) as! NSWindowController
         windowController.contentViewController!.representedObject = docRep
+        scvc = ((windowController.contentViewController! as! NSSplitViewController).splitViewItems[0].viewController as! SourceCodeViewController)
         tvc = ((windowController.contentViewController! as! NSSplitViewController).splitViewItems[1].viewController as! TurtleViewController)
         
         self.addWindowController(windowController)
@@ -85,12 +87,12 @@ class Document: NSDocument {
             let tokenized = try tokenize(text: docRep.text as String)
             Swift.print(tokenized)
             let parser = Parser(tokens: tokenized)
-            let parsed = parser.parse()
+            let parsed = try parser.parse()
             tvc?.clear()
             tvc?.interpret(statements: parsed)
             tvc?.play()
-        } catch TokenizerError.UnexpectedSymbol(let closeTo) {
-            Swift.print("Tokenizer error close to:\(closeTo)")
+        } catch let te as TokenizerError {
+            Swift.print(te.localizedDescription)
         } catch {
             Swift.print("Other error")
         }

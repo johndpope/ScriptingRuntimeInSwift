@@ -35,10 +35,10 @@ public class Parser {
     func parsePoint() -> Expression? {
         //print("parsing point of \(current)")
         switch current {
-        case let .name(varname):
+        case let .name(_, varname):
             index += 1
             return varname
-        case let .num(value):
+        case let .num(_, value):
             index += 1
             return value
         case .openparen:
@@ -51,9 +51,10 @@ public class Parser {
             print("expected close paren, got \(current)")
             return nil
         case .minus:
+            let oldM = current
             index += 1
             if let expr = parsePoint() {
-                return UnaryOperation(operation: .minus, value: expr)
+                return UnaryOperation(operation: oldM, value: expr)
             }
             return nil
         default:
@@ -68,9 +69,10 @@ public class Parser {
             if index >= tokens.count { return left } // incase expression is end
             switch current {
             case .power:
+                let oldP = current
                 index += 1
                 if let right = parseFactor() {
-                    return BinaryOperation(operation: .power, left: left, right: right)
+                    return BinaryOperation(operation: oldP, left: left, right: right)
                 }
                 return nil
             default:
@@ -89,16 +91,18 @@ public class Parser {
                 if index >= tokens.count { return left } // incase expression is end
                 switch current {
                 case .times:
+                    let oldT = current
                     index += 1
                     if let right = parseFactor() {
-                        left = BinaryOperation(operation: .times, left: left, right: right)
+                        left = BinaryOperation(operation: oldT, left: left, right: right)
                     } else {
                         return nil
                     }
                 case .divide:
+                    let oldD = current
                     index += 1
                     if let right = parseFactor() {
-                        left = BinaryOperation(operation: .divide, left: left, right: right)
+                        left = BinaryOperation(operation: oldD, left: left, right: right)
                     } else {
                         return nil
                     }
@@ -121,16 +125,18 @@ public class Parser {
                 //print("current is \(current)")
                 switch current {
                 case .plus:
+                    let oldP = current
                     index += 1
                     if let right = parseTerm() {
-                        left = BinaryOperation(operation: .plus, left: left, right: right)
+                        left = BinaryOperation(operation: oldP, left: left, right: right)
                     } else {
                         return nil
                     }
                 case .minus:
+                    let oldM = current
                     index += 1
                     if let right = parseTerm() {
-                        left = BinaryOperation(operation: .minus, left: left, right: right)
+                        left = BinaryOperation(operation: oldM, left: left, right: right)
                     } else {
                         return nil
                     }
@@ -163,7 +169,7 @@ public class Parser {
     }
     
     func parseSubDec() -> Sub? {
-        if case .sub = current, case let .name(tocall) = lookahead {
+        if case .sub = current, case let .name(_,tocall) = lookahead {
             index += 2
             let sub = Sub(name: tocall, statementList: parseStatementList())
             if case .end = current {
@@ -175,7 +181,7 @@ public class Parser {
     }
     
     func parseSet() -> VarSet? {
-        if case .set = current, case let .name(tocall) = lookahead {
+        if case .set = current, case let .name(_,tocall) = lookahead {
             index += 2
             if let expr = parseExpression() {
                 return VarSet(name: tocall, value: expr)
@@ -199,7 +205,7 @@ public class Parser {
     }
     
     func parseSubCall() -> SubCall? {
-        if case .call = current, case let .name(tocall) = lookahead {
+        if case .call = current, case let .name(_, tocall) = lookahead {
             index += 2
             return SubCall(name: tocall)
         }
@@ -315,7 +321,7 @@ public class Parser {
         return statements
     }
     
-    public func parse() -> StatementList {
+    public func parse() throws -> StatementList {
         return parseStatementList()
     }
     
