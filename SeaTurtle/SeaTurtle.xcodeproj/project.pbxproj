@@ -18,6 +18,7 @@
 		55959DEF1EA087E2000E6039 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55959DEE1EA087E2000E6039 /* Assets.xcassets */; };
 		55959DF21EA087E2000E6039 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55959DF01EA087E2000E6039 /* Main.storyboard */; };
 		559BF92C201EC47500864319 /* LineNumberRulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559BF92B201EC47500864319 /* LineNumberRulerView.swift */; };
+		55A593892028231800E369DC /* ErrorToolTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A593882028231800E369DC /* ErrorToolTip.swift */; };
 		55C4CD7F1EAA804B0091CB5D /* SeaTurtleEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C4CD761EAA804B0091CB5D /* SeaTurtleEngine.framework */; };
 		55C4CD861EAA804B0091CB5D /* SeaTurtleEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C4CD851EAA804B0091CB5D /* SeaTurtleEngineTests.swift */; };
 		55C4CD881EAA804B0091CB5D /* SeaTurtleEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 55C4CD781EAA804B0091CB5D /* SeaTurtleEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -90,6 +91,7 @@
 		55959DFB1EA08843000E6039 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Parser.swift; path = ../../Sources/Parser.swift; sourceTree = "<group>"; };
 		55959DFC1EA08843000E6039 /* Tokenizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tokenizer.swift; path = ../../Sources/Tokenizer.swift; sourceTree = "<group>"; };
 		559BF92B201EC47500864319 /* LineNumberRulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineNumberRulerView.swift; sourceTree = "<group>"; };
+		55A593882028231800E369DC /* ErrorToolTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorToolTip.swift; sourceTree = "<group>"; };
 		55C4CD761EAA804B0091CB5D /* SeaTurtleEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SeaTurtleEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C4CD781EAA804B0091CB5D /* SeaTurtleEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeaTurtleEngine.h; sourceTree = "<group>"; };
 		55C4CD791EAA804B0091CB5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				55959DE81EA087E2000E6039 /* AppDelegate.swift */,
 				55959DEA1EA087E2000E6039 /* SourceCodeViewController.swift */,
 				559BF92B201EC47500864319 /* LineNumberRulerView.swift */,
+				55A593882028231800E369DC /* ErrorToolTip.swift */,
 				55D1C92D201EE17000C7783A /* TextViewLineNumberExtension.swift */,
 				55959DEC1EA087E2000E6039 /* Document.swift */,
 				5578D4591EA1F815005D2C27 /* DocRep.swift */,
@@ -360,6 +363,7 @@
 			files = (
 				5578D4861EA46BD1005D2C27 /* StringDoubleValueTransformer.swift in Sources */,
 				55959DEB1EA087E2000E6039 /* SourceCodeViewController.swift in Sources */,
+				55A593892028231800E369DC /* ErrorToolTip.swift in Sources */,
 				559BF92C201EC47500864319 /* LineNumberRulerView.swift in Sources */,
 				55959DE91EA087E2000E6039 /* AppDelegate.swift in Sources */,
 				5578D45A1EA1F815005D2C27 /* DocRep.swift in Sources */,

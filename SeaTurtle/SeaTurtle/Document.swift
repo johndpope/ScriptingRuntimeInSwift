@@ -71,6 +71,7 @@ class Document: NSDocument {
             sender.label = "Play"
             return
         }
+        scvc?.clearErrors() // clear any existing displayed errors, we're re-parsing
         // hit play
         sender.image = #imageLiteral(resourceName: "pause")
         sender.label = "Pause"
@@ -93,6 +94,7 @@ class Document: NSDocument {
             tvc?.play()
         } catch let te as TokenizerError {
             Swift.print(te.localizedDescription)
+            scvc?.showError(error: te)
         } catch {
             Swift.print("Other error")
         }

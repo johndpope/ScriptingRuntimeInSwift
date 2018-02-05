@@ -22,6 +22,8 @@ import Cocoa
 class LineNumberRulerView: NSRulerView {
     weak var textView: NSTextView!
     let LN_WIDTH: CGFloat = 40.0
+    var errorsByLineNumber: [Int: LocalizedError] = [Int: LocalizedError]()
+    var errorToolTips: [ErrorToolTip] = [ErrorToolTip]()
     
     init(textView: NSTextView) {
         super.init(scrollView: textView.enclosingScrollView, orientation: .verticalRuler)
@@ -33,6 +35,8 @@ class LineNumberRulerView: NSRulerView {
     }
     
     deinit {
+        self.removeAllToolTips()
+        errorToolTips.removeAll()
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -42,6 +46,10 @@ class LineNumberRulerView: NSRulerView {
     
     override func drawHashMarksAndLabels(in rect: NSRect) {
         guard let layoutManager = textView.layoutManager, let textContainer = textView.textContainer else { return }
+        // clear all tooltips because we might need to reassign them to other places as
+        // the user scrolls
+        self.removeAllToolTips()
+        errorToolTips.removeAll()
         // get the line number of the character in the top left corner
         let characterIndex = layoutManager.characterIndex(for: NSPoint(x: 0, y: 0), in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
         let firstLineNumber = textView.lineNumber(at:  characterIndex)
@@ -57,9 +65,20 @@ class LineNumberRulerView: NSRulerView {
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.alignment = NSTextAlignment.right
             let fontAttributes: [NSAttributedStringKey : Any] = [NSAttributedStringKey.font: self.textView.font!, NSAttributedStringKey.paragraphStyle: paragraphStyle]
-            let toDraw = NSAttributedString(string: "\(lineNumber)", attributes: fontAttributes)
+            var toDraw = NSAttributedString(string: "\(lineNumber)", attributes: fontAttributes)
             let topLeft = self.convert(NSPoint(x: rect.minX, y: rect.minY), from: self.textView)
-            toDraw.draw(in: NSRect(x: 0, y: topLeft.y, width: width - LN_CURTOSY_SPACE, height: usedRect.height))
+            let drawRect = NSRect(x: 0, y: topLeft.y, width: width - LN_CURTOSY_SPACE, height: usedRect.height)
+            // if there is an error at this line, draw an X and make a tooltip
+            // for the user to see the extended error message
+            if let error = self.errorsByLineNumber[lineNumber] {
+                toDraw = NSAttributedString(string: "❌ \(lineNumber)", attributes: fontAttributes)
+                let errorToolTip = ErrorToolTip(error)
+                self.errorToolTips.append(errorToolTip)
+                self.addToolTip(drawRect, owner: errorToolTip, userData: nil)
+            }
+            
+            toDraw.draw(in: drawRect)
+            
             lineNumber += 1
         }
     }

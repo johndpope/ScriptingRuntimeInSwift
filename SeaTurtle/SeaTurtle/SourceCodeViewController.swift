@@ -18,19 +18,27 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import Cocoa
+import SeaTurtleEngine
 
 class SourceCodeViewController: NSViewController {
     
     @IBOutlet weak var textView: NSTextView!
+    var lineNumberRulerView: LineNumberRulerView?
+    var errorsByLineNumber: [Int: LocalizedError] = [Int: LocalizedError]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         // Setup Line Numbers
-        textView.enclosingScrollView?.verticalRulerView = LineNumberRulerView(textView: textView)
+        lineNumberRulerView = LineNumberRulerView(textView: textView)
+        textView.enclosingScrollView?.verticalRulerView = lineNumberRulerView
         textView.enclosingScrollView?.hasVerticalRuler = true
         textView.enclosingScrollView?.rulersVisible = true
+    }
+    
+    deinit {
+        lineNumberRulerView = nil
     }
 
     override var representedObject: Any? {
@@ -39,6 +47,22 @@ class SourceCodeViewController: NSViewController {
         }
     }
 
-
+    func showError(error: LocalizedError) {
+        if case let TokenizerError.UnexpectedSymbol(lineNumber, _) = error {
+            errorsByLineNumber[lineNumber] = error
+            lineNumberRulerView?.errorsByLineNumber = errorsByLineNumber
+        }
+        textView.needsDisplay = true
+        lineNumberRulerView?.needsDisplay = true
+    }
+    
+    func clearErrors() {
+        errorsByLineNumber.removeAll()
+        lineNumberRulerView?.errorsByLineNumber.removeAll()
+        lineNumberRulerView?.errorToolTips.removeAll()
+        textView.needsDisplay = true
+        lineNumberRulerView?.needsDisplay = true
+    }
+    
 }
 
