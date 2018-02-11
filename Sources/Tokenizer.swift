@@ -64,6 +64,69 @@ public enum Token {
     case closeparen(Range<String.Index>)
     case name(Range<String.Index>, String)
     case num(Range<String.Index>, Int)
+    
+    public var range: Range<String.Index> {
+        switch self {
+        case .sub(let range):
+            return range
+        case .end(let range):
+            return range
+        case .call(let range):
+            return range
+        case .set(let range):
+            return range
+        case .loop(let range):
+            return range
+        case .left(let range):
+            return range
+        case .right(let range):
+            return range
+        case .forward(let range):
+            return range
+        case .backward(let range):
+            return range
+        case .penup(let range):
+            return range
+        case .pendown(let range):
+            return range
+        case .home(let range):
+            return range
+        case .color(let range):
+            return range
+        case .ifstart(let range):
+            return range
+        case .equal(let range):
+            return range
+        case .notequal(let range):
+            return range
+        case .lessthan(let range):
+            return range
+        case .lessthanequal(let range):
+            return range
+        case .greaterthan(let range):
+            return range
+        case .greaterthanequal(let range):
+            return range
+        case .plus(let range):
+            return range
+        case .minus(let range):
+            return range
+        case .times(let range):
+            return range
+        case .divide(let range):
+            return range
+        case .power(let range):
+            return range
+        case .openparen(let range):
+            return range
+        case .closeparen(let range):
+            return range
+        case .name(let range, _):
+            return range
+        case .num(let range, _):
+            return range
+        }
+    }
 }
 
 // regular expression : how to tokenize

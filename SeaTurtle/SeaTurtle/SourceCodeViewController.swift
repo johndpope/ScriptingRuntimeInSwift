@@ -51,12 +51,19 @@ class SourceCodeViewController: NSViewController {
     func showError(error: LocalizedError) {
         if case let TokenizerError.UnexpectedSymbol(lineNumber, _, range) = error {
             errorsByLineNumber[lineNumber] = error
-            lineNumberRulerView?.errorsByLineNumber = errorsByLineNumber
             // highlight error
             if let textStorage = textView.textStorage {
                 textStorage.addAttribute(NSAttributedStringKey.backgroundColor, value: errorRed, range: NSRange(range, in: textStorage.string))
             }
+        } else if case let ParserError.ParseError(_, token) = error {
+            guard let textStorage = textView.textStorage else { return }
+            let nRange = NSRange(token.range, in: textStorage.string)
+            // get line number for range
+            let lineNumber = textView.lineNumber(at: nRange.location)
+            errorsByLineNumber[lineNumber] = error
+            textStorage.addAttribute(NSAttributedStringKey.backgroundColor, value: errorRed, range: nRange)
         }
+        lineNumberRulerView?.errorsByLineNumber = errorsByLineNumber
         textView.needsDisplay = true
         lineNumberRulerView?.needsDisplay = true
     }
