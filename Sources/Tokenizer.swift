@@ -20,11 +20,11 @@
 import Foundation
 
 public enum TokenizerError: Error, LocalizedError {
-    case UnexpectedSymbol(lineNumber: Int, closeTo: String)
+    case UnexpectedSymbol(lineNumber: Int, closeTo: String, range: Range<String.Index>)
     
     public var errorDescription: String? {
         switch self {
-        case .UnexpectedSymbol(let lineNumber, let closeTo):
+        case .UnexpectedSymbol(let lineNumber, let closeTo, _):
             return "Unexpected symbol at line \(lineNumber) close to:\(closeTo)"
         }
     }
@@ -127,7 +127,8 @@ public func tokenize(text: String) throws -> [Token] {
             let textUpTo = String(text[rangeBefore])
             let lineNumber = textUpTo.split(separator: "\n", omittingEmptySubsequences: false).count
             let closeTo = String(remaining.split(separator: "\n").first!)
-            throw TokenizerError.UnexpectedSymbol(lineNumber: lineNumber, closeTo: closeTo)
+            let errorRange = tokenRange.upperBound..<text.index(tokenRange.upperBound, offsetBy: closeTo.count)
+            throw TokenizerError.UnexpectedSymbol(lineNumber: lineNumber, closeTo: closeTo, range: errorRange)
         }
     }
     return tokens

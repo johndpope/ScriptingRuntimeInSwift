@@ -25,6 +25,7 @@ class SourceCodeViewController: NSViewController {
     @IBOutlet weak var textView: NSTextView!
     var lineNumberRulerView: LineNumberRulerView?
     var errorsByLineNumber: [Int: LocalizedError] = [Int: LocalizedError]()
+    let errorRed = NSColor(calibratedRed: 0.8, green: 0.0, blue: 0.0, alpha: 0.5)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,9 +49,13 @@ class SourceCodeViewController: NSViewController {
     }
 
     func showError(error: LocalizedError) {
-        if case let TokenizerError.UnexpectedSymbol(lineNumber, _) = error {
+        if case let TokenizerError.UnexpectedSymbol(lineNumber, _, range) = error {
             errorsByLineNumber[lineNumber] = error
             lineNumberRulerView?.errorsByLineNumber = errorsByLineNumber
+            // highlight error
+            if let textStorage = textView.textStorage {
+                textStorage.addAttribute(NSAttributedStringKey.backgroundColor, value: errorRed, range: NSRange(range, in: textStorage.string))
+            }
         }
         textView.needsDisplay = true
         lineNumberRulerView?.needsDisplay = true
@@ -60,6 +65,12 @@ class SourceCodeViewController: NSViewController {
         errorsByLineNumber.removeAll()
         lineNumberRulerView?.errorsByLineNumber.removeAll()
         lineNumberRulerView?.errorToolTips.removeAll()
+        // remove all highlights
+        if let textStorage = textView.textStorage {
+            let allRange = NSRange(location: 0, length: textStorage.length)
+            textStorage.removeAttribute(NSAttributedStringKey.backgroundColor, range: allRange)
+        }
+        
         textView.needsDisplay = true
         lineNumberRulerView?.needsDisplay = true
     }

@@ -92,9 +92,9 @@ class Document: NSDocument {
             tvc?.clear()
             tvc?.interpret(statements: parsed)
             tvc?.play()
-        } catch let te as TokenizerError {
-            Swift.print(te.localizedDescription)
-            scvc?.showError(error: te)
+        } catch let le as LocalizedError {
+            Swift.print(le.localizedDescription)
+            scvc?.showError(error: le)
         } catch {
             Swift.print("Other error")
         }
