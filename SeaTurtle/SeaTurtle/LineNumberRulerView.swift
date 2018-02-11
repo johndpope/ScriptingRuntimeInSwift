@@ -52,34 +52,41 @@ class LineNumberRulerView: NSRulerView {
         errorToolTips.removeAll()
         // get the line number of the character in the top left corner
         let characterIndex = layoutManager.characterIndex(for: NSPoint(x: 0, y: 0), in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
-        let firstLineNumber = textView.lineNumber(at:  characterIndex)
+        var lastLineNumber = textView.lineNumber(at:  characterIndex)
         
         // all viewable glyphs
         let glyphRange = layoutManager.glyphRange(forBoundingRect: layoutManager.usedRect(for: textContainer), in: textContainer)
         //
-        var lineNumber = firstLineNumber
+        var lineNumber = lastLineNumber
+        lastLineNumber = -1
         let width = self.frame.width
         let LN_CURTOSY_SPACE: CGFloat = 4.0
         // actual drawing of each line number by each line number fragment
         layoutManager.enumerateLineFragments(forGlyphRange: glyphRange) { [unowned self](rect, usedRect, textContainer, glyphRange, stop) in
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = NSTextAlignment.right
-            let fontAttributes: [NSAttributedStringKey : Any] = [NSAttributedStringKey.font: self.textView.font!, NSAttributedStringKey.paragraphStyle: paragraphStyle]
-            var toDraw = NSAttributedString(string: "\(lineNumber)", attributes: fontAttributes)
-            let topLeft = self.convert(NSPoint(x: rect.minX, y: rect.minY), from: self.textView)
-            let drawRect = NSRect(x: 0, y: topLeft.y, width: width - LN_CURTOSY_SPACE, height: usedRect.height)
-            // if there is an error at this line, draw an X and make a tooltip
-            // for the user to see the extended error message
-            if let error = self.errorsByLineNumber[lineNumber] {
-                toDraw = NSAttributedString(string: "❌ \(lineNumber)", attributes: fontAttributes)
-                let errorToolTip = ErrorToolTip(error)
-                self.errorToolTips.append(errorToolTip)
-                self.addToolTip(drawRect, owner: errorToolTip, userData: nil)
+            // when lines extend beyond the edge of the text view, don't print
+            // the line number twice
+            if (lastLineNumber != lineNumber) {
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.alignment = NSTextAlignment.right
+                let fontAttributes: [NSAttributedStringKey : Any] = [NSAttributedStringKey.font: self.textView.font!, NSAttributedStringKey.paragraphStyle: paragraphStyle]
+                var toDraw = NSAttributedString(string: "\(lineNumber)", attributes: fontAttributes)
+                let topLeft = self.convert(NSPoint(x: rect.minX, y: rect.minY), from: self.textView)
+                let drawRect = NSRect(x: 0, y: topLeft.y, width: width - LN_CURTOSY_SPACE, height: usedRect.height)
+                // if there is an error at this line, draw an X and make a tooltip
+                // for the user to see the extended error message
+                if let error = self.errorsByLineNumber[lineNumber] {
+                    toDraw = NSAttributedString(string: "❌ \(lineNumber)", attributes: fontAttributes)
+                    let errorToolTip = ErrorToolTip(error)
+                    self.errorToolTips.append(errorToolTip)
+                    self.addToolTip(drawRect, owner: errorToolTip, userData: nil)
+                }
+                toDraw.draw(in: drawRect)
             }
-            
-            toDraw.draw(in: drawRect)
-            
-            lineNumber += 1
+            lastLineNumber = lineNumber
+            // check if this is a line that doesn't extend past the end of the textview
+            if self.textView.glyphRangeContainsNewline(glyphRange) {
+                lineNumber += 1
+            }
         }
     }
     

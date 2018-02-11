@@ -27,4 +27,17 @@ extension NSTextView {
         let upTo = textStorage.string.prefix(index)
         return upTo.components(separatedBy: "\n").count
     }
+    
+    /// check if the glyph range contains a backslash n in textStorage
+    func glyphRangeContainsNewline(_ glyphRange: NSRange) -> Bool {
+        guard let textStorage = self.textStorage, let layoutManager = self.layoutManager else { return false }
+        let characterRange = layoutManager.characterRange(forGlyphRange: glyphRange, actualGlyphRange: nil)
+        if let sRange = Range(characterRange, in: textStorage.string) {
+            let characters = textStorage.string[sRange]
+            if characters.contains("\n") {
+                return true
+            }
+        }
+        return false
+    }
 }
