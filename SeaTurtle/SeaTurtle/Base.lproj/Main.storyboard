@@ -676,7 +676,6 @@
                                         <action selector="runSeaTurtleScriptWithSender:" target="6f7-a7-6o1" id="G4R-Y6-Nl4"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="1Cj-KD-dZE"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="DJl-10-mdy"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="a3U-uD-WNx"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="zxo-wb-B3c"/>
@@ -713,7 +712,6 @@
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
-                                <toolbarItem reference="1Cj-KD-dZE"/>
                                 <toolbarItem reference="DJl-10-mdy"/>
                                 <toolbarItem reference="2pi-ye-EP7"/>
                                 <toolbarItem reference="ahp-a1-yp4"/>

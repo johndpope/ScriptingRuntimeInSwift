@@ -70,7 +70,8 @@ public class Parser {
             throw ParserError.ParseError(explanation: "Invalid token following minus sign", token: current)
         default:
             print("invalid point \(current) for parsing")
-            throw ParserError.ParseError(explanation: "Invalid point for parsing", token: current) // unary or single value
+            return nil
+            //throw ParserError.ParseError(explanation: "Invalid point for parsing", token: current) // unary or single value
         }
     }
     
@@ -91,7 +92,8 @@ public class Parser {
             }
         }
         print("couldn't parse point from expression")
-        throw ParserError.ParseError(explanation: "Couldn't parse point from factor", token: current)
+        return nil
+        //throw ParserError.ParseError(explanation: "Couldn't parse point from factor", token: current)
     }
     
     func parseTerm() throws -> Expression? {
@@ -124,7 +126,8 @@ public class Parser {
             return left
         }
         print("couldn't parse factor from term")
-        throw ParserError.ParseError(explanation: "Couldn't parse factor from term", token: current)
+        return nil
+        //throw ParserError.ParseError(explanation: "Couldn't parse factor from term", token: current)
     }
     
     func parseExpression() throws -> Expression? {
@@ -158,7 +161,8 @@ public class Parser {
             return left
         }
         print("Couldn't parse term from expression.")
-        throw ParserError.ParseError(explanation: "Couldn't parse term from expression", token: current)
+        return nil
+        //throw ParserError.ParseError(explanation: "Couldn't parse term from expression", token: current)
     }
     
     func parseBooleanExpression() throws -> BooleanExpression? {
@@ -236,13 +240,15 @@ public class Parser {
             if let expr = try parseExpression() {
                 return Movement(distance: expr, negate: false)
             }
+            throw ParserError.ParseError(explanation: "Expected forward to be followed by expression representing number of steps", token: current)
         } else if case .backward = current {
             index += 1
             if let expr = try parseExpression() {
                 return Movement(distance: expr, negate: true)
             }
+            throw ParserError.ParseError(explanation: "Expected backward to be followed by expression representing number of steps", token: current)
         }
-        throw ParserError.ParseError(explanation: "Expected movement to be forward or backward", token: current)
+        throw ParserError.ParseError(explanation: "Expected movement to be number of forward or backward steps", token: current)
     }
     
     func parseTurn() throws -> Turn? {
