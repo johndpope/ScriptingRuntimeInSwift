@@ -6,13 +6,14 @@ loop -> "repeat" expr statementlist "end"
 subcall -> "call" name
 movement -> "forward" expr | "backward" expr
 turn -> "left" expr | "right" expr
-control -> "penup" | "pendown" | "home" | "color" expr
+control -> "penup" | "pendown" | "home" | "color" expr | "print" expr | "hide" | "show"
 ifstatement -> "if" booleanexpr statementlist "end"
 booleanexpr -> expr ("=" | "!=" | "<=" | "<" | ">=" | ">") expr
 expr -> term { ("+" | "-") term }
 term -> fact { ("*" | "/") fact }
 fact -> point { "^" point }
-point -> name | num | "(" expr ")" | "-" point
+point -> name | num | "(" expr ")" | "-" point | builtin
+builtin -> "random"
 name -> *alphanumeric_combo*
 num -> *integer*
 empty -> *empty*

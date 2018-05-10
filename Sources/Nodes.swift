@@ -20,7 +20,7 @@
 import Foundation
 
 public protocol Statement {
-    
+    var range: Range<String.Index> {get}
 }
 
 public typealias StatementList = [Statement]
@@ -28,30 +28,36 @@ public typealias StatementList = [Statement]
 public struct Sub: Statement {
     public let name: String
     public let statementList: StatementList
+    public let range: Range<String.Index>
 }
 
 public struct VarSet: Statement {
     public let name: String
     public let value: Expression
+    public let range: Range<String.Index>
 }
 
 public struct SubCall: Statement {
     public let name: String
+    public let range: Range<String.Index>
 }
 
 public struct Loop: Statement {
     public let times: Expression
     public let statementList: StatementList
+    public let range: Range<String.Index>
 }
 
 public struct Turn: Statement {
     let angle: Expression
     let negate: Bool
+    public let range: Range<String.Index>
 }
 
 public struct Movement: Statement, CustomDebugStringConvertible {
     let distance: Expression
     let negate: Bool
+    public let range: Range<String.Index>
     public var debugDescription: String {
         return "Movement of \(distance)"
     }
@@ -61,34 +67,43 @@ public protocol Control: Statement {}
 
 public struct PenChange: Control {
     let down: Bool
+    public let range: Range<String.Index>
 }
 
-public struct Home: Control {}
+public struct Home: Control {
+    public let range: Range<String.Index>
+}
 
 public struct ColorChange: Control {
     let number: Expression
+    public let range: Range<String.Index>
 }
 
 public struct IfStatement: Statement {
     let booleanExpression: BooleanExpression
     let statementList: StatementList
+    public let range: Range<String.Index>
 }
 
 public struct BooleanExpression: CustomDebugStringConvertible {
     let operation: Token
     let left: Expression
     let right: Expression
+    public let range: Range<String.Index>
     public var debugDescription: String {
         return "\(operation) -> (\(left), \(right))"
     }
 }
 
-public protocol Expression {}
+public protocol Expression {
+    var range: Range<String.Index> {get}
+}
 
 public struct BinaryOperation: Expression, CustomDebugStringConvertible {
     let operation: Token
     let left: Expression
     let right: Expression
+    public let range: Range<String.Index>
     public var debugDescription: String {
         return "\(operation) -> (\(left), \(right))"
     }
@@ -97,10 +112,18 @@ public struct BinaryOperation: Expression, CustomDebugStringConvertible {
 public struct UnaryOperation: Expression, CustomDebugStringConvertible {
     let operation: Token
     let value: Expression
+    public let range: Range<String.Index>
     public var debugDescription: String {
         return "\(operation) -> \(value)"
     }
 }
 
-extension Int: Expression {}
-extension String: Expression {}
+public struct NumberLiteral: Expression {
+    let number: Int
+    public let range: Range<String.Index>
+}
+
+public struct StringLiteral: Expression {
+    let string: String
+    public let range: Range<String.Index>
+}

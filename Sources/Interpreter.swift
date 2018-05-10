@@ -20,6 +20,7 @@
 import Foundation
 
 public protocol TurtlePlayer {
+    var inProgress: Bool {get}
     var lookupTable: [String : StatementList] {get set} // subroutines
     var variableTable: [String: Int] {get set} // variables
     func addTurn(angle: Int)
@@ -117,11 +118,11 @@ extension TurtlePlayer {
             default:
                 return 0
             }
-        case let name as String:
+        case let name as StringLiteral:
             // should check if variable actually in variableTable
-            return variableTable[name]!
-        case let num as Int:
-            return num
+            return variableTable[name.string]!
+        case let num as NumberLiteral:
+            return num.number
         default:
             return 0
         }

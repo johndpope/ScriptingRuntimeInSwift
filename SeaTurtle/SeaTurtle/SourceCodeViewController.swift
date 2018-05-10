@@ -52,32 +52,41 @@ class SourceCodeViewController: NSViewController {
         if case let TokenizerError.UnexpectedSymbol(lineNumber, _, range) = error {
             errorsByLineNumber[lineNumber] = error
             // highlight error
-            if let textStorage = textView.textStorage {
-                textStorage.addAttribute(NSAttributedStringKey.backgroundColor, value: errorRed, range: NSRange(range, in: textStorage.string))
-            }
+            highlight(range: range, color: errorRed)
         } else if case let ParserError.ParseError(_, token) = error {
             guard let textStorage = textView.textStorage else { return }
             let nRange = NSRange(token.range, in: textStorage.string)
             // get line number for range
             let lineNumber = textView.lineNumber(at: nRange.location)
             errorsByLineNumber[lineNumber] = error
-            textStorage.addAttribute(NSAttributedStringKey.backgroundColor, value: errorRed, range: nRange)
+            highlight(range: token.range, color: errorRed)
         }
         lineNumberRulerView?.errorsByLineNumber = errorsByLineNumber
         textView.needsDisplay = true
         lineNumberRulerView?.needsDisplay = true
     }
     
-    func clearErrors() {
-        errorsByLineNumber.removeAll()
-        lineNumberRulerView?.errorsByLineNumber.removeAll()
-        lineNumberRulerView?.errorToolTips.removeAll()
-        // remove all highlights
+    // highlight a Swift Range<String.Index>
+    func highlight(range: Range<String.Index>, color: NSColor) {
+        guard let textStorage = textView.textStorage else { return }
+        let nRange = NSRange(range, in: textStorage.string)
+        textStorage.addAttribute(NSAttributedStringKey.backgroundColor, value: color, range: nRange)
+    }
+
+    // remove all highlights
+    func clearHighlights() {
         if let textStorage = textView.textStorage {
             let allRange = NSRange(location: 0, length: textStorage.length)
             textStorage.removeAttribute(NSAttributedStringKey.backgroundColor, range: allRange)
         }
-        
+        textView.needsDisplay = true
+    }
+    
+    func clearErrors() {
+        errorsByLineNumber.removeAll()
+        lineNumberRulerView?.errorsByLineNumber.removeAll()
+        lineNumberRulerView?.errorToolTips.removeAll()
+        clearHighlights()
         textView.needsDisplay = true
         lineNumberRulerView?.needsDisplay = true
     }

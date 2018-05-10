@@ -42,6 +42,8 @@ class TurtleViewController: NSViewController, TurtlePlayer {
     var lookupTable: [String: StatementList] = [String: StatementList]()
     var variableTable: [String: Int] = [String: Int]()
     
+    var inProgress: Bool { return steps.count > 0 }
+    
     var path = CGMutablePath()
     var line = SKShapeNode()
 
@@ -137,13 +139,14 @@ class TurtleViewController: NSViewController, TurtlePlayer {
             turtle.isPaused = false
             return
         }
-        let action = SKAction.sequence(steps)
-        turtle.run(action)
-        /*for action in steps {
-            turtle.run(action) {
-                self.path.addLine(to: self.turtle.position)
+        if !steps.isEmpty {
+            let step = steps.removeFirst()
+            step.duration = stepTime
+            turtle.run(step) { [weak self] in
+                self?.play()
             }
-        }*/
+        }
+//        turtle.run(SKAction.sequence(steps))
     }
     
     func pause() {

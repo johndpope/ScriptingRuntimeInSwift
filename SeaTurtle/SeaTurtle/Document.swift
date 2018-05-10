@@ -75,22 +75,16 @@ class Document: NSDocument {
         // hit play
         sender.image = #imageLiteral(resourceName: "pause")
         sender.label = "Pause"
-        
-        if docRep.running { // already running
-            tvc?.play()
-            return
-        }
-        
-        // first run
-        Swift.print("runScript()")
-        docRep.running = true
+
         do {
-            let tokenized = try tokenize(text: docRep.text as String)
-            Swift.print(tokenized)
-            let parser = Parser(tokens: tokenized)
-            let parsed = try parser.parse()
-            tvc?.clear()
-            tvc?.interpret(statements: parsed)
+            if !(tvc?.inProgress ?? false) { // if in progress, continue instead of starting over
+                let tokenized = try tokenize(text: docRep.text as String)
+                Swift.print(tokenized)
+                let parser = Parser(tokens: tokenized)
+                let parsed = try parser.parse()
+                tvc?.clear()
+                tvc?.interpret(statements: parsed)
+            }
             tvc?.play()
         } catch let le as LocalizedError {
             Swift.print(le.localizedDescription)

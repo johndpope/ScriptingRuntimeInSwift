@@ -46,12 +46,12 @@ public class Parser {
     func parsePoint() throws -> Expression? {
         //print("parsing point of \(current)")
         switch current {
-        case let .name(_, varname):
+        case let .name(range, varname):
             index += 1
-            return varname
-        case let .num(_, value):
+            return StringLiteral(string: varname, range: range)
+        case let .num(range, value):
             index += 1
-            return value
+            return NumberLiteral(number: value, range: range)
         case .openparen:
             index += 1
             let expr = try parseExpression()
@@ -65,7 +65,7 @@ public class Parser {
             let oldM = current
             index += 1
             if let expr = try parsePoint() {
-                return UnaryOperation(operation: oldM, value: expr)
+                return UnaryOperation(operation: oldM, value: expr, range: oldM.range.lowerBound..<expr.range.upperBound)
             }
             throw ParserError.ParseError(explanation: "Invalid token following minus sign", token: current)
         default:
@@ -84,7 +84,7 @@ public class Parser {
                 let oldP = current
                 index += 1
                 if let right = try parseFactor() {
-                    return BinaryOperation(operation: oldP, left: left, right: right)
+                    return BinaryOperation(operation: oldP, left: left, right: right, range: left.range.lowerBound..<right.range.upperBound)
                 }
                 throw ParserError.ParseError(explanation: "Couldn't parse factor on right side of ^ sign", token: current)
             default:
@@ -107,7 +107,7 @@ public class Parser {
                     let oldT = current
                     index += 1
                     if let right = try parseFactor() {
-                        left = BinaryOperation(operation: oldT, left: left, right: right)
+                        left = BinaryOperation(operation: oldT, left: left, right: right, range: left.range.lowerBound..<right.range.upperBound)
                     } else {
                         throw ParserError.ParseError(explanation: "Couldn't parse factor on right side of * sign", token: current)
                     }
@@ -115,7 +115,7 @@ public class Parser {
                     let oldD = current
                     index += 1
                     if let right = try parseFactor() {
-                        left = BinaryOperation(operation: oldD, left: left, right: right)
+                        left = BinaryOperation(operation: oldD, left: left, right: right, range: left.range.lowerBound..<right.range.upperBound)
                     } else {
                         throw ParserError.ParseError(explanation: "Couldn't parse factor on right side of / sign", token: current)
                     }
@@ -142,7 +142,7 @@ public class Parser {
                     let oldP = current
                     index += 1
                     if let right = try parseTerm() {
-                        left = BinaryOperation(operation: oldP, left: left, right: right)
+                        left = BinaryOperation(operation: oldP, left: left, right: right, range: left.range.lowerBound..<right.range.upperBound)
                     } else {
                         throw ParserError.ParseError(explanation: "Couldn't parse term on right side of + sign", token: current)
                     }
@@ -150,7 +150,7 @@ public class Parser {
                     let oldM = current
                     index += 1
                     if let right = try parseTerm() {
-                        left = BinaryOperation(operation: oldM, left: left, right: right)
+                        left = BinaryOperation(operation: oldM, left: left, right: right, range: left.range.lowerBound..<right.range.upperBound)
                     } else {
                         throw ParserError.ParseError(explanation: "Couldn't parse term on right side of - sign", token: current)
                     }
@@ -172,7 +172,7 @@ public class Parser {
                     let operation = current
                     index += 1
                     if let right = try parseExpression() {
-                        return BooleanExpression(operation: operation, left: left, right: right)
+                        return BooleanExpression(operation: operation, left: left, right: right, range: left.range.lowerBound..<right.range.upperBound)
                     } else {
                         throw ParserError.ParseError(explanation: "Couldn't parse right side of boolean expression", token: current)
                     }
@@ -186,9 +186,9 @@ public class Parser {
     }
     
     func parseSubDec() throws -> Sub? {
-        if case .sub = current, case let .name(_,tocall) = lookahead {
+        if case let .sub(startRange) = current, case let .name(endRange, tocall) = lookahead {
             index += 2
-            let sub = Sub(name: tocall, statementList: try parseStatementList())
+            let sub = Sub(name: tocall, statementList: try parseStatementList(), range: startRange.lowerBound..<endRange.upperBound)
             if case .end = current {
                 index += 1
                 return sub
@@ -200,10 +200,10 @@ public class Parser {
     }
     
     func parseSet() throws -> VarSet? {
-        if case .set = current, case let .name(_,tocall) = lookahead {
+        if case let .set(startRange) = current, case let .name(_,tocall) = lookahead {
             index += 2
             if let expr = try parseExpression() {
-                return VarSet(name: tocall, value: expr)
+                return VarSet(name: tocall, value: expr, range: startRange.lowerBound..<expr.range.upperBound)
             } else {
                 throw ParserError.ParseError(explanation: "Expected expression after variable name", token: current)
             }
@@ -213,10 +213,10 @@ public class Parser {
     }
     
     func parseLoop() throws -> Loop? {
-        if case .loop = current {
+        if case let .loop(startRange) = current {
             index += 1
             if let expr = try parseExpression() {
-                let loop = Loop(times: expr, statementList: try parseStatementList())
+                let loop = Loop(times: expr, statementList: try parseStatementList(), range: startRange.lowerBound..<expr.range.upperBound)
                 if case .end = current {
                     index += 1
                     return loop
@@ -227,24 +227,24 @@ public class Parser {
     }
     
     func parseSubCall() throws -> SubCall? {
-        if case .call = current, case let .name(_, tocall) = lookahead {
+        if case let .call(startRange) = current, case let .name(endRange, tocall) = lookahead {
             index += 2
-            return SubCall(name: tocall)
+            return SubCall(name: tocall, range: startRange.lowerBound..<endRange.upperBound)
         }
         throw ParserError.ParseError(explanation: "Expected call followed by the name of a subroutine", token: lookahead)
     }
     
     func parseMovement() throws -> Movement? {
-        if case .forward = current {
+        if case let .forward(startRange) = current {
             index += 1
             if let expr = try parseExpression() {
-                return Movement(distance: expr, negate: false)
+                return Movement(distance: expr, negate: false, range: startRange.lowerBound..<expr.range.upperBound)
             }
             throw ParserError.ParseError(explanation: "Expected forward to be followed by expression representing number of steps", token: current)
-        } else if case .backward = current {
+        } else if case let .backward(startRange) = current {
             index += 1
             if let expr = try parseExpression() {
-                return Movement(distance: expr, negate: true)
+                return Movement(distance: expr, negate: true, range: startRange.lowerBound..<expr.range.upperBound)
             }
             throw ParserError.ParseError(explanation: "Expected backward to be followed by expression representing number of steps", token: current)
         }
@@ -252,47 +252,47 @@ public class Parser {
     }
     
     func parseTurn() throws -> Turn? {
-        if case .left = current {
+        if case let .left(startRange) = current {
             index += 1
             if let expr = try parseExpression() {
-                return Turn(angle: expr, negate: false)
+                return Turn(angle: expr, negate: false, range: startRange.lowerBound..<expr.range.upperBound)
             }
-        } else if case .right = current {
+        } else if case let .right(startRange) = current {
             index += 1
             if let expr = try parseExpression() {
-                return Turn(angle: expr, negate: true)
+                return Turn(angle: expr, negate: true, range: startRange.lowerBound..<expr.range.upperBound)
             }
         }
         throw ParserError.ParseError(explanation: "Expected turn to be right or left", token: current)
     }
     
     func parseControl() throws -> Control? {
-        if case .penup = current {
+        if case let .penup(startRange) = current {
             index += 1
-            return PenChange(down: false)
-        } else if case .pendown = current {
+            return PenChange(down: false, range: startRange)
+        } else if case let .pendown(startRange) = current {
             index += 1
-            return PenChange(down: true)
-        } else if case .home = current {
+            return PenChange(down: true, range: startRange)
+        } else if case let .home(startRange) = current {
             index += 1
-            return Home()
-        } else if case .color = current {
+            return Home(range: startRange)
+        } else if case let .color(startRange) = current {
             index += 1
             if let expr = try parseExpression() {
-                return ColorChange(number: expr)
+                return ColorChange(number: expr, range: startRange.lowerBound..<expr.range.upperBound)
             }
         }
         throw ParserError.ParseError(explanation: "Could not identify control for parsing", token: current)
     }
     
     func parseIfStatement() throws -> IfStatement? {
-        if case .ifstart = current {
+        if case let .ifstart(startRange) = current {
             index += 1
             if let boolExpr = try parseBooleanExpression() {
                 let statements = try parseStatementList()
-                if case .end = current {
+                if case let .end(endRange) = current {
                     index += 1 // for end
-                    return IfStatement(booleanExpression: boolExpr, statementList: statements)
+                    return IfStatement(booleanExpression: boolExpr, statementList: statements, range: startRange.lowerBound..<endRange.upperBound)
                 }
             } else {
                 throw ParserError.ParseError(explanation: "Expected boolean expression after if statement", token: current)
