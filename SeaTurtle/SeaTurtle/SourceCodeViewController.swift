@@ -20,12 +20,13 @@
 import Cocoa
 import SeaTurtleEngine
 
-class SourceCodeViewController: NSViewController {
+class SourceCodeViewController: NSViewController, StepDelegate {
     
     @IBOutlet weak var textView: NSTextView!
     var lineNumberRulerView: LineNumberRulerView?
     var errorsByLineNumber: [Int: LocalizedError] = [Int: LocalizedError]()
     let errorRed = NSColor(calibratedRed: 0.8, green: 0.0, blue: 0.0, alpha: 0.5)
+    let highlightYellow = NSColor(calibratedRed: 1.0, green: 1.0, blue: 0.388, alpha: 0.5)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,5 +92,14 @@ class SourceCodeViewController: NSViewController {
         lineNumberRulerView?.needsDisplay = true
     }
     
+    // MARK: StepDelegate
+    func willStep(range: Range<String.Index>) {
+        clearHighlights()
+        highlight(range: range, color: highlightYellow)
+    }
+    
+    func doneStepping() {
+        clearHighlights()
+    }
 }
 

@@ -22,8 +22,19 @@ import SeaTurtleEngine
 
 class Document: NSDocument {
     @objc var docRep: DocRep = DocRep()
+    @objc weak var playBarItem: NSToolbarItem!
     weak var tvc: TurtleViewController?
     weak var scvc: SourceCodeViewController?
+    
+    var playPauseToolbarItem: NSToolbarItem? {
+        guard let toolbarItems = self.windowControllers[0].window?.toolbar?.items else { return nil }
+        if let index = toolbarItems.index(where: { (toolBarItem) -> Bool in
+            return toolBarItem.label == "Play" || toolBarItem.label == "Pause"
+        }) {
+            return toolbarItems[index]
+        }
+        return nil
+    }
 
     override init() {
         super.init()
@@ -41,6 +52,7 @@ class Document: NSDocument {
         windowController.contentViewController!.representedObject = docRep
         scvc = ((windowController.contentViewController! as! NSSplitViewController).splitViewItems[0].viewController as! SourceCodeViewController)
         tvc = ((windowController.contentViewController! as! NSSplitViewController).splitViewItems[1].viewController as! TurtleViewController)
+        tvc?.stepDelegate = scvc
         
         self.addWindowController(windowController)
     }
@@ -67,13 +79,13 @@ class Document: NSDocument {
     @IBAction func runSeaTurtleScript(sender: NSToolbarItem) {
         guard sender.label == "Play" else { // hit pause
             tvc?.pause()
-            sender.image = #imageLiteral(resourceName: "play")
+            sender.image = NSImage(named: NSImage.Name(rawValue: "NSPlayTemplate"))
             sender.label = "Play"
             return
         }
         scvc?.clearErrors() // clear any existing displayed errors, we're re-parsing
         // hit play
-        sender.image = #imageLiteral(resourceName: "pause")
+        sender.image = NSImage(named: NSImage.Name(rawValue: "NSPauseTemplate"))
         sender.label = "Pause"
 
         do {
@@ -92,6 +104,39 @@ class Document: NSDocument {
         } catch {
             Swift.print("Other error")
         }
+    }
+    
+    @IBAction func stepScript(sender: NSToolbarItem) {
+        if tvc?.steps.count ?? 0 == 0 {
+            do {
+                if !(tvc?.inProgress ?? false) { // if in progress, continue instead of starting over
+                    let tokenized = try tokenize(text: docRep.text as String)
+                    Swift.print(tokenized)
+                    let parser = Parser(tokens: tokenized)
+                    let parsed = try parser.parse()
+                    tvc?.clear()
+                    tvc?.interpret(statements: parsed)
+                }
+                tvc?.step()
+            } catch let le as LocalizedError {
+                Swift.print(le.localizedDescription)
+                scvc?.showError(error: le)
+            } catch {
+                Swift.print("Other error")
+            }
+        } else {
+            tvc?.step()
+        }
+    }
+    
+    @IBAction func clearScript(sender: NSToolbarItem) {
+        tvc?.clear()
+        playPauseToolbarItem?.image = NSImage(named: NSImage.Name(rawValue: "NSPlayTemplate"))
+        playPauseToolbarItem?.label = "Play"
+    }
+    
+    @IBAction func showVariablesWindow(sender: NSToolbarItem) {
+        
     }
 
 }

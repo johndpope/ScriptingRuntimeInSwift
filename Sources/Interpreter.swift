@@ -23,11 +23,12 @@ public protocol TurtlePlayer {
     var inProgress: Bool {get}
     var lookupTable: [String : StatementList] {get set} // subroutines
     var variableTable: [String: Int] {get set} // variables
-    func addTurn(angle: Int)
-    func addMove(distance: Int)
-    func goHome()
-    func changePen(down: Bool)
-    func changeColor(color: Int)
+    func addTurn(angle: Int, turn: Turn)
+    func addMove(distance: Int, movement: Movement)
+    func goHome(home: Home)
+    func changePen(down: Bool, penChange: PenChange)
+    func changeColor(color: Int, colorChange: ColorChange)
+    func variableChanged(name: String, value: Int, varSet: VarSet)
     func play()
     func pause()
     func clear()
@@ -40,17 +41,17 @@ extension TurtlePlayer {
             case let turn as Turn:
                 var angle = evaluate(expression: turn.angle)
                 if turn.negate { angle = -angle }
-                addTurn(angle: angle)
+                addTurn(angle: angle, turn: turn)
             case let move as Movement:
                 var distance = evaluate(expression: move.distance)
                 if move.negate { distance = -distance }
-                addMove(distance: distance)
-            case _ as Home:
-                goHome()
+                addMove(distance: distance, movement: move)
+            case let home as Home:
+                goHome(home: home)
             case let penchange as PenChange:
-                changePen(down: penchange.down)
+                changePen(down: penchange.down, penChange: penchange)
             case let colorchange as ColorChange:
-                changeColor(color: evaluate(expression: colorchange.number))
+                changeColor(color: evaluate(expression: colorchange.number), colorChange: colorchange)
             case let subcall as SubCall:
                 interpret(statements: lookupTable[subcall.name]!)
             case let loop as Loop:

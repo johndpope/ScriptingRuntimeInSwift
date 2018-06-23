@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -658,7 +658,7 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="SeaTurtle" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="-115"/>
+            <point key="canvasLocation" x="76" y="-175"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -671,7 +671,7 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <toolbar key="toolbar" implicitIdentifier="BCEE9527-948A-490D-B860-57A3967C0C4E" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="phl-C7-9Dh">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="A90930E8-27F9-47A6-866C-3E2DDC87EF06" label="Play" paletteLabel="Play" tag="-1" image="play" autovalidates="NO" id="ahp-a1-yp4">
+                                <toolbarItem implicitItemIdentifier="A90930E8-27F9-47A6-866C-3E2DDC87EF06" label="Play" paletteLabel="Play" tag="-1" image="NSPlayTemplate" autovalidates="NO" id="ahp-a1-yp4">
                                     <connections>
                                         <action selector="runSeaTurtleScriptWithSender:" target="6f7-a7-6o1" id="G4R-Y6-Nl4"/>
                                     </connections>
@@ -710,13 +710,27 @@
                                         </connections>
                                     </popUpButton>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="60A41662-C9EC-46A4-867C-89F03599EBCF" label="Step" paletteLabel="Step" tag="-1" image="NSGoRightTemplate" id="XDS-UD-XZi">
+                                    <connections>
+                                        <action selector="stepScriptWithSender:" target="6f7-a7-6o1" id="yyv-1O-PtV"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="186CD9F4-1D1E-4364-8843-9445213A63DA" label="Reset" paletteLabel="Reset" tag="-1" image="NSRefreshTemplate" id="b0D-yY-8it">
+                                    <connections>
+                                        <action selector="clearScriptWithSender:" target="6f7-a7-6o1" id="qmc-oa-I4a"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="8F2A3801-A98E-4F9C-A292-6B5D44F6E0D8" label="Variables" paletteLabel="Variables" tag="-1" image="NXHelpIndex" id="Q9m-lA-wdT"/>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="DJl-10-mdy"/>
                                 <toolbarItem reference="2pi-ye-EP7"/>
                                 <toolbarItem reference="ahp-a1-yp4"/>
+                                <toolbarItem reference="XDS-UD-XZi"/>
+                                <toolbarItem reference="b0D-yY-8it"/>
                                 <toolbarItem reference="aOj-A0-XH8"/>
                                 <toolbarItem reference="2pi-ye-EP7"/>
+                                <toolbarItem reference="Q9m-lA-wdT"/>
                                 <toolbarItem reference="a3U-uD-WNx"/>
                             </defaultToolbarItems>
                         </toolbar>
@@ -750,7 +764,7 @@
                     </connections>
                 </arrayController>
             </objects>
-            <point key="canvasLocation" x="90" y="100"/>
+            <point key="canvasLocation" x="90" y="108"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="I20-Kn-phP">
@@ -775,7 +789,7 @@
                 </splitViewController>
                 <customObject id="i36-2K-o6W" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="90" y="513"/>
+            <point key="canvasLocation" x="90" y="664"/>
         </scene>
         <!--Source Code View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -838,7 +852,41 @@
                 </objectController>
                 <userDefaultsController representsSharedInstance="YES" id="gTY-pg-ocP"/>
             </objects>
-            <point key="canvasLocation" x="90" y="976"/>
+            <point key="canvasLocation" x="99" y="1336"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="Xn4-Gs-DJp">
+            <objects>
+                <windowController id="QIh-Oh-7eO" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="4YN-O6-6Iw">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="294" y="313" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+                        <connections>
+                            <outlet property="delegate" destination="QIh-Oh-7eO" id="byW-QZ-3P7"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="ZPf-Is-Iux" kind="relationship" relationship="window.shadowedContentViewController" id="ai6-31-idz"/>
+                    </connections>
+                </windowController>
+                <customObject id="mN6-1H-F8w" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="658" y="68"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="HuH-uF-KB4">
+            <objects>
+                <viewController id="ZPf-Is-Iux" sceneMemberID="viewController">
+                    <view key="view" id="9VQ-mc-Ay5">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="tuw-9T-YGg" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1351" y="62"/>
         </scene>
         <!--Turtle View Controller-->
         <scene sceneID="pZw-M4-p5y">
@@ -847,14 +895,99 @@
                     <view key="view" id="kme-id-Bvo" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="Tge-a0-aR9">
+                                <rect key="frame" x="386" y="3" width="44" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="FEn-6O-val"/>
+                                    <constraint firstAttribute="height" constant="23" id="tSX-gL-huZ"/>
+                                </constraints>
+                                <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <binding destination="A2n-PU-gup" name="value" keyPath="self.displayColor" id="1k8-FE-jdB"/>
+                                </connections>
+                            </colorWell>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oec-Sw-VKz">
+                                <rect key="frame" x="327" y="2" width="54" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="17a-PI-etX"/>
+                                    <constraint firstAttribute="width" constant="48" id="iE0-f7-Pos"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="sBM-0O-k8L"/>
+                                <connections>
+                                    <binding destination="A2n-PU-gup" name="value" keyPath="self.displayPenDown" id="XLa-fG-aZj"/>
+                                </connections>
+                            </imageView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nrs-fQ-3De">
+                                <rect key="frame" x="85" y="6" width="37" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="aK8-IQ-DvM">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="A2n-PU-gup" name="displayPatternValue1" keyPath="self.displayY" id="Gxf-Jl-sEA">
+                                        <dictionary key="options">
+                                            <string key="NSDisplayPattern">Y: %{value1}@</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="puC-ew-SmG">
+                                <rect key="frame" x="147" y="6" width="37" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="pNX-vH-VTb">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="A2n-PU-gup" name="displayPatternValue1" keyPath="self.displayAngle" id="Z4v-98-Vxi">
+                                        <dictionary key="options">
+                                            <string key="NSDisplayPattern">Angle: %{value1}@°</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4XH-L8-dTe">
+                                <rect key="frame" x="18" y="6" width="37" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="SzK-2Q-WBv">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="A2n-PU-gup" name="displayPatternValue1" keyPath="self.displayX" id="KZS-oe-iJo">
+                                        <dictionary key="options">
+                                            <string key="NSDisplayPattern">X: %{value1}@</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="nrs-fQ-3De" firstAttribute="leading" secondItem="4XH-L8-dTe" secondAttribute="trailing" constant="34" id="18H-gw-6m2"/>
+                            <constraint firstItem="4XH-L8-dTe" firstAttribute="centerY" secondItem="nrs-fQ-3De" secondAttribute="centerY" id="HED-m9-sLe"/>
+                            <constraint firstItem="nrs-fQ-3De" firstAttribute="centerY" secondItem="oec-Sw-VKz" secondAttribute="centerY" id="TV7-Br-GMO"/>
+                            <constraint firstAttribute="bottom" secondItem="Tge-a0-aR9" secondAttribute="bottom" constant="3" id="UdA-mw-fbc"/>
+                            <constraint firstAttribute="trailing" secondItem="Tge-a0-aR9" secondAttribute="trailing" constant="20" id="YDB-aI-110"/>
+                            <constraint firstItem="puC-ew-SmG" firstAttribute="leading" secondItem="nrs-fQ-3De" secondAttribute="trailing" constant="29" id="ZLj-bx-nAC"/>
+                            <constraint firstItem="Tge-a0-aR9" firstAttribute="leading" secondItem="oec-Sw-VKz" secondAttribute="trailing" constant="8" id="ljG-L0-jyS"/>
+                            <constraint firstItem="4XH-L8-dTe" firstAttribute="leading" secondItem="kme-id-Bvo" secondAttribute="leading" constant="20" id="pec-e1-VwH"/>
+                            <constraint firstItem="oec-Sw-VKz" firstAttribute="centerY" secondItem="Tge-a0-aR9" secondAttribute="centerY" id="xyB-10-MwP"/>
+                            <constraint firstItem="puC-ew-SmG" firstAttribute="centerY" secondItem="nrs-fQ-3De" secondAttribute="centerY" id="ytd-Fe-rNY"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="N80-P8-bCd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController id="QP3-52-cjM"/>
             </objects>
             <point key="canvasLocation" x="650" y="513"/>
         </scene>
     </scenes>
     <resources>
-        <image name="play" width="63" height="73"/>
+        <image name="NSGoRightTemplate" width="9" height="12"/>
+        <image name="NSPlayTemplate" width="25" height="23"/>
+        <image name="NSRefreshTemplate" width="11" height="15"/>
+        <image name="NXHelpIndex" width="128" height="128"/>
     </resources>
 </document>

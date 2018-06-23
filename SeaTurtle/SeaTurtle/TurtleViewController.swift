@@ -28,6 +28,19 @@ extension Int
         return CGFloat(self) * CGFloat.pi / 180.0
     }
 }
+extension CGFloat
+{
+    var rad2Deg: CGFloat
+    {
+        return self * 180 / CGFloat.pi
+    }
+}
+
+// mainly for highlighting code currently running
+protocol StepDelegate: class {
+    func willStep(range: Range<String.Index>)
+    func doneStepping()
+}
 
 class TurtleViewController: NSViewController, TurtlePlayer {
     var scene: SKScene?
@@ -35,17 +48,27 @@ class TurtleViewController: NSViewController, TurtlePlayer {
     var stepTime: TimeInterval {
         return (parent?.representedObject as! DocRep).timeInterval.doubleValue
     }
-    var steps: [SKAction] = [SKAction]()
+    var steps: [(SKAction, Range<String.Index>)] = [(SKAction, Range<String.Index>)]()
     var curAngle: CGFloat = 90.deg2Rad
     var penDown: Bool = true
     var penColor: NSColor = .green
     var lookupTable: [String: StatementList] = [String: StatementList]()
     var variableTable: [String: Int] = [String: Int]()
     
+    @objc dynamic var displayX: Int = 0
+    @objc dynamic var displayY: Int = 0
+    @objc dynamic var displayAngle: Int = 90
+    @objc dynamic var displayColor: NSColor = .green
+    @objc dynamic var displayPenDown: NSImage = #imageLiteral(resourceName: "pendown")
+    @objc dynamic var displayVariableTable: NSMutableDictionary = NSMutableDictionary()
     var inProgress: Bool { return steps.count > 0 }
     
     var path = CGMutablePath()
     var line = SKShapeNode()
+    
+    var stopPlay = false
+    
+    weak var stepDelegate: StepDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,13 +102,18 @@ class TurtleViewController: NSViewController, TurtlePlayer {
         scene?.addChild(line)
     }
     
-    func addTurn(angle: Int) {
+    func addTurn(angle: Int, turn: Turn) {
         curAngle += angle.deg2Rad
-        let action = SKAction.rotate(toAngle: curAngle, duration: stepTime)
-        steps.append(action)
+        let action1 = SKAction.rotate(toAngle: curAngle, duration: stepTime)
+        let action2 = SKAction.customAction(withDuration: 0.0) { [tangle = curAngle] (node, float) in
+            let tempAngle: Int = Int(tangle.rad2Deg) % 360
+            self.displayAngle = tempAngle < 0 ? tempAngle + 360 : tempAngle
+        }
+        let combined = SKAction.sequence([action1, action2])
+        steps.append((combined, turn.range))
     }
     
-    func addMove(distance: Int) {
+    func addMove(distance: Int, movement: Movement) {
         let dx = CGFloat(distance) * cos(curAngle)
         let dy = CGFloat(distance) * sin(curAngle)
         let action1 = SKAction.moveBy(x: dx, y: dy, duration: stepTime)
@@ -96,28 +124,37 @@ class TurtleViewController: NSViewController, TurtlePlayer {
             } else {
                 path.move(to: self.turtle.position)
             }
+            self.displayX = Int(self.turtle.position.x)
+            self.displayY = Int(self.turtle.position.y)
             line.path = path
         }
         let combined = SKAction.sequence([action1, action2])
-        steps.append(combined)
+        steps.append((combined, movement.range))
     }
     
-    func goHome() {
+    func goHome(home: Home) {
         curAngle = 90.deg2Rad
         let action1 = SKAction.move(to: CGPoint(x: (scene?.size.width)!/2, y: (scene?.size.height)!/2), duration: stepTime)
         let action2 = SKAction.rotate(toAngle: curAngle, duration: stepTime, shortestUnitArc: true)
         let action3 = SKAction.customAction(withDuration: 0.0) { [unowned self](node, float) in
             self.path.move(to: self.turtle.position)
+            self.displayX = Int(self.turtle.position.x)
+            self.displayY = Int(self.turtle.position.y)
+            self.displayAngle = 90
         }
         let combined = SKAction.sequence([action1, action2, action3])
-        steps.append(combined)
+        steps.append((combined, home.range))
     }
     
-    func changePen(down: Bool) {
+    func changePen(down: Bool, penChange: PenChange) {
         penDown = down
+        let action = SKAction.customAction(withDuration: 0.0) { [unowned self, tdown = penDown](node, float) in
+            self.displayPenDown = tdown ? #imageLiteral(resourceName: "pendown") : #imageLiteral(resourceName: "penup")
+        }
+        steps.append((action, penChange.range))
     }
     
-    func changeColor(color: Int) {
+    func changeColor(color: Int, colorChange: ColorChange) {
         resetLine()
         
         switch color {
@@ -132,16 +169,34 @@ class TurtleViewController: NSViewController, TurtlePlayer {
         default:
             penColor = .green
         }
+        
+        let action = SKAction.customAction(withDuration: 0.0) { [unowned self, tcolor = penColor](node, float) in
+            self.displayColor = tcolor
+        }
+        steps.append((action, colorChange.range))
+    }
+    
+    func variableChanged(name: String, value: Int, varSet: VarSet) {
+        let action = SKAction.customAction(withDuration: 0.0) { [unowned self, tname = name, tvalue = value](node, float) in
+            self.displayVariableTable[tname] = tvalue
+        }
+        steps.append((action, varSet.range))
     }
     
     func play() {
+        stepDelegate?.doneStepping()
         guard !turtle.isPaused else {
             turtle.isPaused = false
             return
         }
+        guard !stopPlay else {
+            stopPlay = false
+            return
+        }
         if !steps.isEmpty {
-            let step = steps.removeFirst()
+            let (step, _) = steps.removeFirst()
             step.duration = stepTime
+            
             turtle.run(step) { [weak self] in
                 self?.play()
             }
@@ -153,10 +208,37 @@ class TurtleViewController: NSViewController, TurtlePlayer {
         turtle.isPaused = true
     }
     
+    func step() {
+        if !steps.isEmpty {
+            turtle.isPaused = false
+            stopPlay = true
+            let (step, range) = steps.removeFirst()
+            stepDelegate?.willStep(range: range)
+            step.duration = stepTime
+            turtle.run(step)
+        } else {
+            stepDelegate?.doneStepping()
+        }
+    }
+    
     func clear() {
+        turtle.removeAllActions()
         lookupTable.removeAll()
+        variableTable.removeAll()
         steps.removeAll()
         scene?.removeAllChildren()
+        
+        curAngle = 90.deg2Rad
+        penDown = true
+        penColor = .green
+        
+        displayX = 0
+        displayY = 0
+        displayAngle = 90
+        displayColor = .green
+        displayPenDown = #imageLiteral(resourceName: "pendown")
+        displayVariableTable.removeAllObjects()
+        
         resetTurtle()
         resetLine()
     }
