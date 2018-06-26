@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		552E8C9420E1DF4100B930C7 /* VariablesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E8C9320E1DF4100B930C7 /* VariablesViewController.swift */; };
 		5578D45A1EA1F815005D2C27 /* DocRep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5578D4591EA1F815005D2C27 /* DocRep.swift */; };
 		5578D45D1EA3289E005D2C27 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5578D45C1EA3289E005D2C27 /* SpriteKit.framework */; };
 		5578D45F1EA32E46005D2C27 /* TurtleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5578D45E1EA32E46005D2C27 /* TurtleViewController.swift */; };
@@ -74,6 +75,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		552E8C9320E1DF4100B930C7 /* VariablesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariablesViewController.swift; sourceTree = "<group>"; };
 		5578D4591EA1F815005D2C27 /* DocRep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocRep.swift; sourceTree = "<group>"; };
 		5578D45C1EA3289E005D2C27 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		5578D45E1EA32E46005D2C27 /* TurtleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurtleViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				5578D4591EA1F815005D2C27 /* DocRep.swift */,
 				5578D45E1EA32E46005D2C27 /* TurtleViewController.swift */,
 				5578D4851EA46BD1005D2C27 /* StringDoubleValueTransformer.swift */,
+				552E8C9320E1DF4100B930C7 /* VariablesViewController.swift */,
 				55959DEE1EA087E2000E6039 /* Assets.xcassets */,
 				55959DF01EA087E2000E6039 /* Main.storyboard */,
 				55959DF31EA087E2000E6039 /* Info.plist */,
@@ -361,6 +364,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				552E8C9420E1DF4100B930C7 /* VariablesViewController.swift in Sources */,
 				5578D4861EA46BD1005D2C27 /* StringDoubleValueTransformer.swift in Sources */,
 				55959DEB1EA087E2000E6039 /* SourceCodeViewController.swift in Sources */,
 				55A593892028231800E369DC /* ErrorToolTip.swift in Sources */,

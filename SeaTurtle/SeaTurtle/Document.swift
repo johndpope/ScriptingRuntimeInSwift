@@ -71,8 +71,8 @@ class Document: NSDocument {
         // Insert code here to read your document from the given data of the specified type. If outError != nil, ensure that you create and set an appropriate error when returning false.
         // You can also choose to override readFromFileWrapper:ofType:error: or readFromURL:ofType:error: instead.
         // If you override either of these, you should also override -isEntireFileLoaded to return false if the contents are lazily loaded.
-        let j = String(data: data, encoding: String.Encoding.utf8)!
-        Swift.print(j)
+        //let j = String(data: data, encoding: String.Encoding.utf8)!
+        //Swift.print(j)
         docRep.text = NSString(data: data, encoding: String.Encoding.utf8.rawValue)!
     }
     
@@ -91,7 +91,7 @@ class Document: NSDocument {
         do {
             if !(tvc?.inProgress ?? false) { // if in progress, continue instead of starting over
                 let tokenized = try tokenize(text: docRep.text as String)
-                Swift.print(tokenized)
+                //Swift.print(tokenized)
                 let parser = Parser(tokens: tokenized)
                 let parsed = try parser.parse()
                 tvc?.clear()
@@ -111,7 +111,7 @@ class Document: NSDocument {
             do {
                 if !(tvc?.inProgress ?? false) { // if in progress, continue instead of starting over
                     let tokenized = try tokenize(text: docRep.text as String)
-                    Swift.print(tokenized)
+                    //Swift.print(tokenized)
                     let parser = Parser(tokens: tokenized)
                     let parsed = try parser.parse()
                     tvc?.clear()
@@ -136,7 +136,13 @@ class Document: NSDocument {
     }
     
     @IBAction func showVariablesWindow(sender: NSToolbarItem) {
+        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
+        let variablesWindowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Variables Window Controller")) as! NSWindowController
         
+        if let variablesWindow = variablesWindowController.window, let variablesViewController = variablesWindowController.contentViewController as? VariablesViewController  {
+            variablesViewController.displayVariableTable = (tvc?.displayVariableTable)!
+            variablesWindow.makeKeyAndOrderFront(self)
+        }
     }
 
 }

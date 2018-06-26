@@ -61,7 +61,9 @@ extension TurtlePlayer {
             case let subdec as Sub:
                 lookupTable[subdec.name] = subdec.statementList
             case let varset as VarSet:
-                variableTable[varset.name] = evaluate(expression: varset.value)
+                let value = evaluate(expression: varset.value)
+                variableTable[varset.name] = value
+                variableChanged(name: varset.name, value: value, varSet: varset)
             case let ifstatement as IfStatement:
                 if evaluate(booleanExpression: ifstatement.booleanExpression) {
                     interpret(statements: ifstatement.statementList)
