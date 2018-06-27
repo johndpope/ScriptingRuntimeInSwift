@@ -179,7 +179,9 @@ class TurtleViewController: NSViewController, TurtlePlayer {
     func variableChanged(name: String, value: Int, varSet: VarSet) {
         let action = SKAction.customAction(withDuration: 0.0) { [unowned self, tname = name, tvalue = value](node, float) in
             //self.displayVariableTable[tname] = tvalue
+            self.willChangeValue(forKey: "displayVariableTable")
             self.displayVariableTable.setValue(tvalue, forKey: tname)
+            self.didChangeValue(forKey: "displayVariableTable")
         }
         steps.append((action, varSet.range))
     }

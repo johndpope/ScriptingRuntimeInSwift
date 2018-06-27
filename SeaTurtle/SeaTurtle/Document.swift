@@ -48,7 +48,7 @@ class Document: NSDocument {
     override func makeWindowControllers() {
         // Returns the Storyboard that contains your Document window.
         let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
-        let windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Document Window Controller")) as! NSWindowController
+        let windowController: DocumentWindowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Document Window Controller")) as! DocumentWindowController
         windowController.contentViewController!.representedObject = docRep
         scvc = ((windowController.contentViewController! as! NSSplitViewController).splitViewItems[0].viewController as! SourceCodeViewController)
         tvc = ((windowController.contentViewController! as! NSSplitViewController).splitViewItems[1].viewController as! TurtleViewController)
@@ -140,7 +140,9 @@ class Document: NSDocument {
         let variablesWindowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Variables Window Controller")) as! NSWindowController
         
         if let variablesWindow = variablesWindowController.window, let variablesViewController = variablesWindowController.contentViewController as? VariablesViewController  {
-            variablesViewController.displayVariableTable = (tvc?.displayVariableTable)!
+            // for kvo, we don't copy the reference to the dictionary, but rather
+            // to the whole view controller
+            variablesViewController.tvc = tvc
             variablesWindow.makeKeyAndOrderFront(self)
         }
     }
