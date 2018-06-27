@@ -129,9 +129,9 @@ extension TurtlePlayer {
             default:
                 return 0
             }
-        case let name as StringLiteral:
+        case let name as VarName:
             // should check if variable actually in variableTable
-            return variableTable[name.string]!
+            return variableTable[name.string] ?? 0
         case let num as NumberLiteral:
             return num.number
         default:

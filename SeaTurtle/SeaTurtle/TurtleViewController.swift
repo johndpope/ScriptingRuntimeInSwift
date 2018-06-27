@@ -105,7 +105,7 @@ class TurtleViewController: NSViewController, TurtlePlayer {
     func addTurn(angle: Int, turn: Turn) {
         curAngle += angle.deg2Rad
         let action1 = SKAction.rotate(toAngle: curAngle, duration: stepTime)
-        let action2 = SKAction.customAction(withDuration: 0.0) { [tangle = curAngle] (node, float) in
+        let action2 = SKAction.run { [unowned self, tangle = curAngle]  in
             let tempAngle: Int = Int(tangle.rad2Deg) % 360
             self.displayAngle = tempAngle < 0 ? tempAngle + 360 : tempAngle
         }
@@ -117,7 +117,7 @@ class TurtleViewController: NSViewController, TurtlePlayer {
         let dx = CGFloat(distance) * cos(curAngle)
         let dy = CGFloat(distance) * sin(curAngle)
         let action1 = SKAction.moveBy(x: dx, y: dy, duration: stepTime)
-        let action2 = SKAction.customAction(withDuration: 0.0) { [unowned self, down = penDown, color = penColor, line = line, path = path](node, float) in
+        let action2 = SKAction.run { [unowned self, down = penDown, color = penColor, line = line, path = path] in
             if down {
                 line.strokeColor = color
                 path.addLine(to: self.turtle.position)
@@ -136,7 +136,7 @@ class TurtleViewController: NSViewController, TurtlePlayer {
         curAngle = 90.deg2Rad
         let action1 = SKAction.move(to: CGPoint(x: (scene?.size.width)!/2, y: (scene?.size.height)!/2), duration: stepTime)
         let action2 = SKAction.rotate(toAngle: curAngle, duration: stepTime, shortestUnitArc: true)
-        let action3 = SKAction.customAction(withDuration: 0.0) { [unowned self](node, float) in
+        let action3 = SKAction.run { [unowned self] in
             self.path.move(to: self.turtle.position)
             self.displayX = Int(self.turtle.position.x)
             self.displayY = Int(self.turtle.position.y)
@@ -148,7 +148,7 @@ class TurtleViewController: NSViewController, TurtlePlayer {
     
     func changePen(down: Bool, penChange: PenChange) {
         penDown = down
-        let action = SKAction.customAction(withDuration: 0.0) { [unowned self, tdown = penDown](node, float) in
+        let action = SKAction.run { [unowned self, tdown = penDown] in
             self.displayPenDown = tdown ? #imageLiteral(resourceName: "pendown") : #imageLiteral(resourceName: "penup")
         }
         steps.append((action, penChange.range))
@@ -170,14 +170,14 @@ class TurtleViewController: NSViewController, TurtlePlayer {
             penColor = .green
         }
         
-        let action = SKAction.customAction(withDuration: 0.0) { [unowned self, tcolor = penColor](node, float) in
+        let action = SKAction.run { [unowned self, tcolor = penColor] in
             self.displayColor = tcolor
         }
         steps.append((action, colorChange.range))
     }
     
     func variableChanged(name: String, value: Int, varSet: VarSet) {
-        let action = SKAction.customAction(withDuration: 0.0) { [unowned self, tname = name, tvalue = value](node, float) in
+        let action = SKAction.run { [unowned self, tname = name, tvalue = value] in
             //self.displayVariableTable[tname] = tvalue
             self.willChangeValue(forKey: "displayVariableTable")
             self.displayVariableTable.setValue(tvalue, forKey: tname)
@@ -187,12 +187,14 @@ class TurtleViewController: NSViewController, TurtlePlayer {
     }
     
     func log(str: String, printStatement: PrintStatement) {
-        let action = SKAction.customAction(withDuration: 0.0) { [unowned self, tstr = str](node, float) in
+        let action = SKAction.run { [unowned self, tstr = str] in
             if let docRep = (self.parent?.representedObject as? DocRep) {
                 docRep.output.append("\(tstr)\n")
+                
             }
         }
         steps.append((action, printStatement.range))
+        print(str)
     }
     
     func play() {
@@ -224,6 +226,7 @@ class TurtleViewController: NSViewController, TurtlePlayer {
         if !steps.isEmpty {
             turtle.isPaused = false
             stopPlay = true
+            //print(steps.count)
             let (step, range) = steps.removeFirst()
             stepDelegate?.willStep(range: range)
             step.duration = stepTime

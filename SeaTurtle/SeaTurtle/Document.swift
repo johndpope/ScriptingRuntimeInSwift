@@ -111,7 +111,7 @@ class Document: NSDocument {
             do {
                 if !(tvc?.inProgress ?? false) { // if in progress, continue instead of starting over
                     let tokenized = try tokenize(text: docRep.text as String)
-                    //Swift.print(tokenized)
+                    Swift.print(tokenized)
                     let parser = Parser(tokens: tokenized)
                     let parsed = try parser.parse()
                     tvc?.clear()

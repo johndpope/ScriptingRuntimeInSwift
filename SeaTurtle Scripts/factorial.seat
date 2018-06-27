@@ -1,0 +1,12 @@
+; This program calculates a factorial
+; To change the factorial it calculates, change the initial value of x
+; For instance, to calculate 20!, change Line 4 to SET x 20
+SET x 20 ; the factorial we want to calculate
+SET step x ; our loop stepper
+SET accumulator 1 ; our result holding accumulator
+REPEAT x
+	SET accumulator accumulator * step
+	SET step step - 1
+	PRINT accumulator
+END
+PRINT "$x! = $accumulator"

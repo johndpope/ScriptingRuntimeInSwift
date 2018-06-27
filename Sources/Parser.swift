@@ -48,7 +48,7 @@ public class Parser {
         switch current {
         case let .name(range, varname):
             index += 1
-            return StringLiteral(string: varname, range: range)
+            return VarName(string: varname, range: range)
         case let .num(range, value):
             index += 1
             return NumberLiteral(number: value, range: range)

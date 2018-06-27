@@ -129,7 +129,7 @@ public struct NumberLiteral: Expression {
     public let range: Range<String.Index>
 }
 
-public struct StringLiteral: Expression {
+public struct VarName: Expression {
     let string: String
     public let range: Range<String.Index>
 }
