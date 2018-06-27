@@ -48,6 +48,7 @@ public enum Token {
     case pendown(Range<String.Index>)
     case home(Range<String.Index>)
     case color(Range<String.Index>)
+    case print(Range<String.Index>)
     case ifstart(Range<String.Index>)
     case equal(Range<String.Index>)
     case notequal(Range<String.Index>)
@@ -64,6 +65,7 @@ public enum Token {
     case closeparen(Range<String.Index>)
     case name(Range<String.Index>, String)
     case num(Range<String.Index>, Int)
+    case string(Range<String.Index>, String)
     
     public var range: Range<String.Index> {
         switch self {
@@ -92,6 +94,8 @@ public enum Token {
         case .home(let range):
             return range
         case .color(let range):
+            return range
+        case .print(let range):
             return range
         case .ifstart(let range):
             return range
@@ -125,6 +129,8 @@ public enum Token {
             return range
         case .num(let range, _):
             return range
+        case .string(let range, _):
+            return range
         }
     }
 }
@@ -146,6 +152,7 @@ var conversions: [(String, (Range<String.Index>, String) -> Token?)] =
      ("pendown", { r,_ in .pendown(r) }),
      ("home", { r,_ in .home(r) }),
      ("color", { r,_ in .color(r) }),
+     ("print", { r,_ in .print(r) }),
      ("if", { r,_ in .ifstart(r) }),
      ("=", { r,_ in .equal(r) }),
      ("!=", { r,_ in .notequal(r) }),
@@ -160,6 +167,7 @@ var conversions: [(String, (Range<String.Index>, String) -> Token?)] =
      ("\\^", { r,_ in .power(r) }),
      ("\\(", { r,_ in .openparen(r) }),
      ("\\)", { r,_ in .closeparen(r) }),
+     ("\"(.*)\"", { r,str in .string(r, str) }),
      ("[a-zA-Z][a-zA-Z0-9]*", { r,str in .name(r, str) }),
      ("-?[0-9]+", { r,str in .num(r, Int(str)!) })]
 

@@ -79,6 +79,12 @@ public struct ColorChange: Control {
     public let range: Range<String.Index>
 }
 
+public struct PrintStatement: Statement {
+    let expression: Expression?
+    let string: String?
+    public let range: Range<String.Index>
+}
+
 public struct IfStatement: Statement {
     let booleanExpression: BooleanExpression
     let statementList: StatementList

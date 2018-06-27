@@ -37,6 +37,8 @@ class SourceCodeViewController: NSViewController, StepDelegate {
         textView.enclosingScrollView?.verticalRulerView = lineNumberRulerView
         textView.enclosingScrollView?.hasVerticalRuler = true
         textView.enclosingScrollView?.rulersVisible = true
+        // turn off smart quotes
+        textView.isAutomaticQuoteSubstitutionEnabled = false
     }
     
     deinit {

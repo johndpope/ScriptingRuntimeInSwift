@@ -285,6 +285,19 @@ public class Parser {
         throw ParserError.ParseError(explanation: "Could not identify control for parsing", token: current)
     }
     
+    func parsePrint() throws -> PrintStatement? {
+        if case let .print(startRange) = current {
+            index += 1
+            if case let .string(endRange, str) = current {
+                index += 1
+                return PrintStatement(expression: nil, string: str, range: startRange.lowerBound..<endRange.upperBound)
+            } else if let expr = try parseExpression() {
+                return PrintStatement(expression: expr, string: nil, range: startRange.lowerBound..<expr.range.upperBound)
+            }
+        }
+        throw ParserError.ParseError(explanation: "Expect expression or string literal to follow print.", token: current)
+    }
+    
     func parseIfStatement() throws -> IfStatement? {
         if case let .ifstart(startRange) = current {
             index += 1
@@ -328,6 +341,8 @@ public class Parser {
             return try parseControl()
         case .color:
             return try parseControl()
+        case .print:
+            return try parsePrint()
         case .ifstart:
             return try parseIfStatement()
         default:

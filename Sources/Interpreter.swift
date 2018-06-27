@@ -29,6 +29,7 @@ public protocol TurtlePlayer {
     func changePen(down: Bool, penChange: PenChange)
     func changeColor(color: Int, colorChange: ColorChange)
     func variableChanged(name: String, value: Int, varSet: VarSet)
+    func log(str: String, printStatement: PrintStatement)
     func play()
     func pause()
     func clear()
@@ -52,6 +53,13 @@ extension TurtlePlayer {
                 changePen(down: penchange.down, penChange: penchange)
             case let colorchange as ColorChange:
                 changeColor(color: evaluate(expression: colorchange.number), colorChange: colorchange)
+            case let printstatement as PrintStatement:
+                if let expr = printstatement.expression {
+                    log(str: "\(evaluate(expression: expr))", printStatement: printstatement)
+                } else if let str = printstatement.string {
+                    let strRevised = handleInterpolation(str)
+                    log(str: strRevised, printStatement: printstatement)
+                }
             case let subcall as SubCall:
                 interpret(statements: lookupTable[subcall.name]!)
             case let loop as Loop:
@@ -129,5 +137,25 @@ extension TurtlePlayer {
         default:
             return 0
         }
+    }
+    
+    func handleInterpolation(_ original: String) -> String {
+        var replacement = original
+        let regex = try! NSRegularExpression(pattern: "\\$[a-zA-Z][a-zA-Z0-9]*", options: [])
+        var startLocation: Int = 0
+        while let match = regex.firstMatch(in: replacement, options: [], range: NSRange(location: startLocation, length: replacement.count - startLocation)) {
+            let identifierRange = NSRange(location: match.range.lowerBound + 1, length: match.range.length - 1) // exclude dollar sign
+            let start = replacement.index(replacement.startIndex, offsetBy: identifierRange.lowerBound)
+            let end = replacement.index(replacement.startIndex, offsetBy: identifierRange.upperBound)
+            let identifier = String(replacement[start..<end])
+            if let value = variableTable[identifier] {
+                let start = replacement.index(replacement.startIndex, offsetBy: identifierRange.lowerBound - 1)
+                replacement.replaceSubrange(start..<end, with: "\(value)")
+                startLocation = identifierRange.lowerBound
+            } else {
+                startLocation = identifierRange.upperBound
+            }
+        }
+        return replacement
     }
 }

@@ -9,7 +9,7 @@
 import Cocoa
 
 class OutputViewController: NSViewController {
-    weak var docRep: DocRep?
+    @objc dynamic weak var docRep: DocRep?
 
     override func viewDidLoad() {
         super.viewDidLoad()

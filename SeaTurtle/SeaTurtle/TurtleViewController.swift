@@ -186,6 +186,15 @@ class TurtleViewController: NSViewController, TurtlePlayer {
         steps.append((action, varSet.range))
     }
     
+    func log(str: String, printStatement: PrintStatement) {
+        let action = SKAction.customAction(withDuration: 0.0) { [unowned self, tstr = str](node, float) in
+            if let docRep = (self.parent?.representedObject as? DocRep) {
+                docRep.output.append("\(tstr)\n")
+            }
+        }
+        steps.append((action, printStatement.range))
+    }
+    
     func play() {
         stepDelegate?.doneStepping()
         guard !turtle.isPaused else {
