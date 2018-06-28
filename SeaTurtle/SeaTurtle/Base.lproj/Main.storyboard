@@ -896,7 +896,7 @@
                             <rect key="frame" x="1" y="1" width="433" height="298"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <textView editable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="bar" continuousSpellChecking="YES" allowsUndo="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="aNz-Gl-52q">
+                                <textView editable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="bar" allowsNonContiguousLayout="YES" id="aNz-Gl-52q">
                                     <rect key="frame" x="0.0" y="0.0" width="433" height="298"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -904,7 +904,13 @@
                                     <size key="maxSize" width="463" height="10000000"/>
                                     <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <connections>
-                                        <binding destination="RTQ-3Y-KbO" name="value" keyPath="selection.self.output" id="z3j-Lp-Cb4"/>
+                                        <binding destination="RTQ-3Y-KbO" name="value" keyPath="selection.self.output" id="C2j-pC-mpP">
+                                            <dictionary key="options">
+                                                <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                <bool key="NSValidatesImmediately" value="YES"/>
+                                            </dictionary>
+                                        </binding>
                                     </connections>
                                 </textView>
                             </subviews>
@@ -919,11 +925,19 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
+                    <connections>
+                        <outlet property="textView" destination="aNz-Gl-52q" id="Mqg-or-ab0"/>
+                    </connections>
                 </viewController>
                 <customObject id="iCQ-S1-NSc" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <objectController objectClassName="SeaTurtle.DocRep" id="RTQ-3Y-KbO">
+                <objectController objectClassName="SeaTurtle.DocRep" editable="NO" id="RTQ-3Y-KbO">
                     <connections>
-                        <binding destination="f2P-8e-qZ4" name="contentObject" keyPath="self.docRep" id="LCf-0z-Ndd"/>
+                        <binding destination="f2P-8e-qZ4" name="contentObject" keyPath="self.docRep" id="4WG-rd-bcI">
+                            <dictionary key="options">
+                                <bool key="NSConditionallySetsEditable" value="NO"/>
+                                <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
                     </connections>
                 </objectController>
             </objects>
@@ -1182,6 +1196,6 @@
         <image name="NSPlayTemplate" width="25" height="23"/>
         <image name="NSRefreshTemplate" width="11" height="15"/>
         <image name="NXHelpIndex" width="61" height="46"/>
-        <image name="NXUpdate" width="128" height="128"/>
+        <image name="NXUpdate" width="56" height="43"/>
     </resources>
 </document>

@@ -189,8 +189,10 @@ class TurtleViewController: NSViewController, TurtlePlayer {
     func log(str: String, printStatement: PrintStatement) {
         let action = SKAction.run { [unowned self, tstr = str] in
             if let docRep = (self.parent?.representedObject as? DocRep) {
-                docRep.output.append("\(tstr)\n")
-                
+                //docRep.willChangeValue(forKey: "output")
+                //docRep.output.append("\(tstr)\n")
+                docRep.output = docRep.output.appending("\(tstr)\n") as NSString
+                //docRep.didChangeValue(forKey: "output")
             }
         }
         steps.append((action, printStatement.range))

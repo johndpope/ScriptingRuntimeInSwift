@@ -22,7 +22,7 @@ import Foundation
 class DocRep: NSObject {
     @objc dynamic let possibleTimeIntervals: NSMutableArray = [0.01, 0.1, 0.2, 0.5, 1.0, 2.0]
     @objc dynamic var text: NSString = ""
-    @objc dynamic var output: NSMutableString = NSMutableString()
+    @objc dynamic var output: NSString = ""
     @objc dynamic var running: Bool = false
     @objc dynamic var timeInterval: NSNumber = 0.5
 }
