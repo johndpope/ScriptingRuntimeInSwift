@@ -3,7 +3,7 @@
 SeaTurtle is a simple [turtle graphics](https://en.wikipedia.org/wiki/Turtle_graphics) scripting language and runtime for macOS built in Swift.
 ![Release 0.0.1](SeaTurtle001.png)
 
-SeaTurtle is reminiscent of (but not compatible with) the Logo programming language environments popular in elementary schools in the '80s and early '90s.
+SeaTurtle is reminiscent of (but not compatible with) the Logo programming language environments popular in elementary schools in the '80s and early '90s. The scripting language is kind of a cross between Logo and early versions of BASIC, including BASIC's very significant limitations and simplicity.
 
 ## Scripting Language
 
