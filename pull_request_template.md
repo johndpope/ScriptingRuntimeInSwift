@@ -2,6 +2,6 @@ SeaTurtle is licensed under the GPL version 3. By contributing code to this repo
 
 - [ ] I agree to license my contributions to SeaTurtle under the GPL version 3.
 - [ ] I agree to assign the copyright of my contributions (works) to SeaTurtle to David Kopec.
-- [ ] I understand that David Kopec sells a commercial version of SeaTurtle, and he may use my contributions in that version with no restrictions.
+- [ ] I understand that David Kopec sells a commercial version of SeaTurtle, and he may use my contributions in that version with no restrictions beyond those imposed by the GPL version 3.
 
 For more information about why I am forced to insist on this policy in order to eliminate any ambiguity, please see [the FAQ of the FSF on this issue](https://www.gnu.org/licenses/gpl-faq.en.html#AssignCopyright). In addition please sign the contributors list in `CONTRIBUTORS.md`.
