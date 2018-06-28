@@ -51,6 +51,9 @@ The turtle will draw lines beneath it as it moves.
 `COLOR N`
 Change the color of the lines the turtle draws. If X is 0 it will be yellow, 1 orange, 2, red, 3 magenta, and anything else green.
 
+`PRINT Expression or "String"`
+SeaTurtle can log to an output window. The print statement can take a mathematical expression or a string in double quotes. Strings can have variable names after a dollar sign, as in `$N` to interpolate the variables into the string.
+
 All numbers must be integers. All subroutine and variable names must start with a letter. In the above, N can be an integer literal, previously declared variable, or arithmetic expression using the operators `+`, `-`, `*`, `/`, `^`, and parenthesis `( )`. For the context-free grammar of SeaTurtle, see the file `cfg.txt`. See some sample scripts in the directory `SeaTurtle Scripts`.
 
 Comments start with a semicolon (`;`) and end at the end of the line. Once a semicolon is hit, the rest of the line will not be processed.
@@ -73,10 +76,6 @@ The SeaTurtle scripting language will hopefully get:
 And the SeaTurtle runtime environment should have:
 
 - [ ] Syntax Highlighting/Coloring
-- [ ] Real-time reporting of syntax or parsing errors
-- [ ] Stepping through scripts forwards and backwards
-- [ ] Pausing execution
-- [X] Clear canvas option
 - [ ] Printing support (both scripts and turtle graphics images)
 - [ ] Turtle graphics picture exports
 - [ ] A Tutorial
@@ -85,3 +84,7 @@ And the SeaTurtle runtime environment should have:
 ## Authorship and License
 
 SeaTurtle is written by David Kopec and released under the GNU GPL Version 3.
+
+## Contributing
+
+Contributors should know that I plan to sell an inexpensive commercial version of SeaTurtle on the Mac App Store, and should be comfortable with their contributions being used by me for-profit. All contributions to SeaTurtle must be released under the GPL and copyright must be assigned to me as the creator of SeaTurtle. This is laid out in the pull-request template. This is to ensure no ambiguity ([see FSF](https://www.gnu.org/licenses/gpl-faq.en.html#AssignCopyright) for more information on the copyright assignment issue.
