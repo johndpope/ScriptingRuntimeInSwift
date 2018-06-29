@@ -1,3 +1,7 @@
+<p align="center"><img src="Sources/SeaTurtle/logo1.png" alt="SeaTurtle" height="300px"></p>
+
+
+
 # SeaTurtle
 
 SeaTurtle is a simple [turtle graphics](https://en.wikipedia.org/wiki/Turtle_graphics) scripting language and runtime for macOS built in Swift.
