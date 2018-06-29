@@ -13,6 +13,10 @@
 		5578D45F1EA32E46005D2C27 /* TurtleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5578D45E1EA32E46005D2C27 /* TurtleViewController.swift */; };
 		5578D4841EA3F726005D2C27 /* cfg.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5578D4831EA3F726005D2C27 /* cfg.txt */; };
 		5578D4861EA46BD1005D2C27 /* StringDoubleValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5578D4851EA46BD1005D2C27 /* StringDoubleValueTransformer.swift */; };
+		55841D3F20E5DF55006EB209 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55841D3E20E5DF55006EB209 /* ImageIO.framework */; };
+		55841D4120E5F269006EB209 /* ExportAnimatedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55841D4020E5F269006EB209 /* ExportAnimatedViewController.swift */; };
+		55841D4320E5FDC5006EB209 /* ExportAnimationTurtleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55841D4220E5FDC5006EB209 /* ExportAnimationTurtleViewController.swift */; };
+		55841D4520E60E32006EB209 /* AnimatedGIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55841D4420E60E32006EB209 /* AnimatedGIF.swift */; };
 		55959DE91EA087E2000E6039 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55959DE81EA087E2000E6039 /* AppDelegate.swift */; };
 		55959DEB1EA087E2000E6039 /* SourceCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55959DEA1EA087E2000E6039 /* SourceCodeViewController.swift */; };
 		55959DED1EA087E2000E6039 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55959DEC1EA087E2000E6039 /* Document.swift */; };
@@ -84,6 +88,10 @@
 		5578D4811EA34514005D2C27 /* Interpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Interpreter.swift; path = ../../Sources/Interpreter.swift; sourceTree = "<group>"; };
 		5578D4831EA3F726005D2C27 /* cfg.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cfg.txt; path = ../../cfg.txt; sourceTree = "<group>"; };
 		5578D4851EA46BD1005D2C27 /* StringDoubleValueTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringDoubleValueTransformer.swift; sourceTree = "<group>"; };
+		55841D3E20E5DF55006EB209 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		55841D4020E5F269006EB209 /* ExportAnimatedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportAnimatedViewController.swift; sourceTree = "<group>"; };
+		55841D4220E5FDC5006EB209 /* ExportAnimationTurtleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportAnimationTurtleViewController.swift; sourceTree = "<group>"; };
+		55841D4420E60E32006EB209 /* AnimatedGIF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedGIF.swift; sourceTree = "<group>"; };
 		55959DE51EA087E2000E6039 /* SeaTurtle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeaTurtle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55959DE81EA087E2000E6039 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55959DEA1EA087E2000E6039 /* SourceCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceCodeViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55841D3F20E5DF55006EB209 /* ImageIO.framework in Frameworks */,
 				55C4CD8B1EAA804B0091CB5D /* SeaTurtleEngine.framework in Frameworks */,
 				5578D45D1EA3289E005D2C27 /* SpriteKit.framework in Frameworks */,
 			);
@@ -138,9 +147,18 @@
 		5578D45B1EA3289D005D2C27 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				55841D3E20E5DF55006EB209 /* ImageIO.framework */,
 				5578D45C1EA3289E005D2C27 /* SpriteKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		55841D4620E60E3A006EB209 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				55841D4420E60E32006EB209 /* AnimatedGIF.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		55959DDC1EA087E2000E6039 = {
@@ -170,6 +188,7 @@
 				5578D4831EA3F726005D2C27 /* cfg.txt */,
 				55959DF91EA08833000E6039 /* Engine */,
 				55959DE81EA087E2000E6039 /* AppDelegate.swift */,
+				55841D4620E60E3A006EB209 /* Model */,
 				55C2375020E295B000758C5C /* View Controller */,
 				55C2375120E295C700758C5C /* Views */,
 				55959DEC1EA087E2000E6039 /* Document.swift */,
@@ -200,6 +219,8 @@
 				5578D45E1EA32E46005D2C27 /* TurtleViewController.swift */,
 				552E8C9320E1DF4100B930C7 /* VariablesViewController.swift */,
 				55C2375420E32E1400758C5C /* OutputViewController.swift */,
+				55841D4020E5F269006EB209 /* ExportAnimatedViewController.swift */,
+				55841D4220E5FDC5006EB209 /* ExportAnimationTurtleViewController.swift */,
 			);
 			name = "View Controller";
 			sourceTree = "<group>";
@@ -387,17 +408,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				552E8C9420E1DF4100B930C7 /* VariablesViewController.swift in Sources */,
+				55841D4320E5FDC5006EB209 /* ExportAnimationTurtleViewController.swift in Sources */,
 				55C2375520E32E1400758C5C /* OutputViewController.swift in Sources */,
 				5578D4861EA46BD1005D2C27 /* StringDoubleValueTransformer.swift in Sources */,
 				55C2375320E2B70F00758C5C /* DocumentWindowController.swift in Sources */,
 				55959DEB1EA087E2000E6039 /* SourceCodeViewController.swift in Sources */,
 				55A593892028231800E369DC /* ErrorToolTip.swift in Sources */,
+				55841D4520E60E32006EB209 /* AnimatedGIF.swift in Sources */,
 				559BF92C201EC47500864319 /* LineNumberRulerView.swift in Sources */,
 				55959DE91EA087E2000E6039 /* AppDelegate.swift in Sources */,
 				5578D45A1EA1F815005D2C27 /* DocRep.swift in Sources */,
 				5578D45F1EA32E46005D2C27 /* TurtleViewController.swift in Sources */,
 				55D1C92E201EE17100C7783A /* TextViewLineNumberExtension.swift in Sources */,
 				55959DED1EA087E2000E6039 /* Document.swift in Sources */,
+				55841D4120E5F269006EB209 /* ExportAnimatedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

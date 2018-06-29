@@ -21,6 +21,6 @@ class OutputViewController: NSViewController, NSTextStorageDelegate {
     // every time we output scroll to the bottom
     func textStorage(_ textStorage: NSTextStorage, didProcessEditing editedMask: NSTextStorageEditActions, range editedRange: NSRange, changeInLength delta: Int) {
         print("textDidChange")
-        self.textView.scrollToVisible(NSRect(x: 0, y: textView.frame.height - 1, width: self.textView.frame.width, height: 1))
+        self.textView.scrollRangeToVisible(NSRange(location: textView.string.count, length: 0))
     }
 }

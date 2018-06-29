@@ -88,6 +88,8 @@ class TurtleViewController: NSViewController, TurtlePlayer {
         turtle = SKSpriteNode(imageNamed: "turtle")
         curAngle = 90.deg2Rad
         turtle.position = CGPoint(x: (scene?.size.width)!/2, y: (scene?.size.height)!/2)
+        self.displayX = Int(self.turtle.position.x)
+        self.displayY = Int(self.turtle.position.y)
         turtle.zRotation = curAngle
         scene?.addChild(turtle)
     }

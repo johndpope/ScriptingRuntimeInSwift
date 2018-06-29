@@ -6,6 +6,100 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Export Animated View Controller-->
+        <scene sceneID="Qou-Z6-ERy">
+            <objects>
+                <viewController id="fRv-1M-iOV" customClass="ExportAnimatedViewController" customModule="SeaTurtle" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="9gx-IH-KPZ">
+                        <rect key="frame" x="0.0" y="0.0" width="360" height="124"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3jy-dg-EEH">
+                                <rect key="frame" x="114" y="87" width="133" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Export Animated GIF" id="OGm-Ue-42j">
+                                    <font key="font" metaFont="titleBar"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pbw-iu-8Bi">
+                                <rect key="frame" x="78" y="17" width="62" height="26"/>
+                                <popUpButtonCell key="cell" type="push" title="0.01" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="gwf-i5-3kQ" id="dJg-yc-WQt">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="jar-Ec-Ecl">
+                                        <items>
+                                            <menuItem title="0.01" state="on" id="gwf-i5-3kQ"/>
+                                            <menuItem title="0.1" id="ews-B5-qnb"/>
+                                            <menuItem title="0.5" id="MJb-D1-gdl"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                            </popUpButton>
+                            <progressIndicator wantsLayer="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="xBO-nF-gF0">
+                                <rect key="frame" x="20" y="60" width="320" height="20"/>
+                            </progressIndicator>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aT1-xq-ZYh">
+                                <rect key="frame" x="18" y="22" width="42" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Delay" id="Kvf-Cg-E8o">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jrA-gm-KPp">
+                                <rect key="frame" x="185" y="13" width="82" height="32"/>
+                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="b3q-0o-VJW">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="cancelWithSender:" target="fRv-1M-iOV" id="2aX-X9-M1j"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7ua-je-FYZ">
+                                <rect key="frame" x="266" y="13" width="80" height="32"/>
+                                <buttonCell key="cell" type="push" title="Export" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EjB-cF-Ykg">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="exportWithSender:" target="fRv-1M-iOV" id="gpQ-8N-zWa"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="aT1-xq-ZYh" secondAttribute="bottom" constant="22" id="3Dt-f9-E5s"/>
+                            <constraint firstItem="aT1-xq-ZYh" firstAttribute="leading" secondItem="xBO-nF-gF0" secondAttribute="leading" id="5Uf-RK-M0Y"/>
+                            <constraint firstItem="3jy-dg-EEH" firstAttribute="centerX" secondItem="9gx-IH-KPZ" secondAttribute="centerX" id="6my-dR-wj9"/>
+                            <constraint firstItem="Pbw-iu-8Bi" firstAttribute="centerY" secondItem="aT1-xq-ZYh" secondAttribute="centerY" id="GTf-p4-hDb"/>
+                            <constraint firstItem="7ua-je-FYZ" firstAttribute="trailing" secondItem="xBO-nF-gF0" secondAttribute="trailing" id="Jyq-5f-DJz"/>
+                            <constraint firstItem="jrA-gm-KPp" firstAttribute="centerY" secondItem="7ua-je-FYZ" secondAttribute="centerY" id="KBO-pa-7pB"/>
+                            <constraint firstItem="7ua-je-FYZ" firstAttribute="leading" secondItem="jrA-gm-KPp" secondAttribute="trailing" constant="11" id="LQk-fZ-QIU"/>
+                            <constraint firstItem="7ua-je-FYZ" firstAttribute="centerY" secondItem="Pbw-iu-8Bi" secondAttribute="centerY" id="Qpt-5q-jLn"/>
+                            <constraint firstItem="3jy-dg-EEH" firstAttribute="top" secondItem="9gx-IH-KPZ" secondAttribute="top" constant="20" id="eZ4-BO-e8H"/>
+                            <constraint firstItem="xBO-nF-gF0" firstAttribute="leading" secondItem="9gx-IH-KPZ" secondAttribute="leading" constant="20" id="fNf-sQ-Pmc"/>
+                            <constraint firstItem="jrA-gm-KPp" firstAttribute="leading" relation="lessThanOrEqual" secondItem="Pbw-iu-8Bi" secondAttribute="trailing" constant="54" id="g7m-xQ-guH"/>
+                            <constraint firstItem="Pbw-iu-8Bi" firstAttribute="leading" secondItem="aT1-xq-ZYh" secondAttribute="trailing" constant="22" id="j3O-c1-DXU"/>
+                            <constraint firstItem="xBO-nF-gF0" firstAttribute="top" secondItem="3jy-dg-EEH" secondAttribute="bottom" constant="8" id="rJi-Y0-aYr"/>
+                            <constraint firstAttribute="trailing" secondItem="xBO-nF-gF0" secondAttribute="trailing" constant="20" id="z8A-Vy-CMS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="delayPopup" destination="Pbw-iu-8Bi" id="MdV-Qg-0zx"/>
+                        <outlet property="exportProgressBar" destination="xBO-nF-gF0" id="aje-Og-FlQ"/>
+                    </connections>
+                </viewController>
+                <customObject id="Rex-u3-pUS" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="165" y="-349"/>
+        </scene>
         <!--Application-->
         <scene sceneID="JPo-4y-FX3">
             <objects>
@@ -667,7 +761,7 @@
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="Ckk-yw-fiv">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="contentRect" x="135" y="240" width="630" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <toolbar key="toolbar" implicitIdentifier="BCEE9527-948A-490D-B860-57A3967C0C4E" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="phl-C7-9Dh">
                             <allowedToolbarItems>
@@ -730,6 +824,11 @@
                                         <segue destination="9sW-5k-aia" kind="show" identifier="Output Segue" id="NbD-zS-rdV"/>
                                     </connections>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="0AB6A9F7-A662-4117-919B-15393DB62DF8" label="Export GIF" paletteLabel="Export GIF" tag="-1" image="NSMediaBrowserMediaTypeMoviesTemplate32" id="u6E-Q2-8dc">
+                                    <connections>
+                                        <segue destination="fRv-1M-iOV" kind="sheet" identifier="Export Animated Segue" id="Lfw-kL-UW5"/>
+                                    </connections>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="DJl-10-mdy"/>
@@ -741,6 +840,8 @@
                                 <toolbarItem reference="2pi-ye-EP7"/>
                                 <toolbarItem reference="kB9-CZ-OF4"/>
                                 <toolbarItem reference="Q9m-lA-wdT"/>
+                                <toolbarItem reference="2pi-ye-EP7"/>
+                                <toolbarItem reference="u6E-Q2-8dc"/>
                                 <toolbarItem reference="a3U-uD-WNx"/>
                             </defaultToolbarItems>
                         </toolbar>
@@ -774,7 +875,7 @@
                     </connections>
                 </arrayController>
             </objects>
-            <point key="canvasLocation" x="90" y="108"/>
+            <point key="canvasLocation" x="104" y="108"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="I20-Kn-phP">
@@ -1097,13 +1198,13 @@
         <!--Turtle View Controller-->
         <scene sceneID="pZw-M4-p5y">
             <objects>
-                <viewController id="A2n-PU-gup" customClass="TurtleViewController" customModule="SeaTurtle" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Turtle View Controller" id="A2n-PU-gup" customClass="TurtleViewController" customModule="SeaTurtle" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="kme-id-Bvo" customClass="SKView">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="500"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="Tge-a0-aR9">
-                                <rect key="frame" x="386" y="3" width="44" height="23"/>
+                                <rect key="frame" x="436" y="3" width="44" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="FEn-6O-val"/>
                                     <constraint firstAttribute="height" constant="23" id="tSX-gL-huZ"/>
@@ -1114,7 +1215,7 @@
                                 </connections>
                             </colorWell>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oec-Sw-VKz">
-                                <rect key="frame" x="327" y="2" width="54" height="26"/>
+                                <rect key="frame" x="377" y="2" width="54" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="17a-PI-etX"/>
                                     <constraint firstAttribute="width" constant="48" id="iE0-f7-Pos"/>
@@ -1124,7 +1225,7 @@
                                     <binding destination="A2n-PU-gup" name="value" keyPath="self.displayPenDown" id="XLa-fG-aZj"/>
                                 </connections>
                             </imageView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nrs-fQ-3De">
+                            <textField horizontalHuggingPriority="252" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nrs-fQ-3De">
                                 <rect key="frame" x="85" y="6" width="37" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="aK8-IQ-DvM">
                                     <font key="font" metaFont="system"/>
@@ -1140,7 +1241,7 @@
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="puC-ew-SmG">
-                                <rect key="frame" x="147" y="6" width="37" height="17"/>
+                                <rect key="frame" x="147" y="6" width="87" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="pNX-vH-VTb">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1154,7 +1255,7 @@
                                     </binding>
                                 </connections>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4XH-L8-dTe">
+                            <textField horizontalHuggingPriority="253" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4XH-L8-dTe">
                                 <rect key="frame" x="18" y="6" width="37" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="SzK-2Q-WBv">
                                     <font key="font" metaFont="system"/>
@@ -1188,11 +1289,12 @@
                 <customObject id="N80-P8-bCd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="QP3-52-cjM"/>
             </objects>
-            <point key="canvasLocation" x="650" y="513"/>
+            <point key="canvasLocation" x="679" y="578"/>
         </scene>
     </scenes>
     <resources>
         <image name="NSGoRightTemplate" width="9" height="12"/>
+        <image name="NSMediaBrowserMediaTypeMoviesTemplate32" width="128" height="128"/>
         <image name="NSPlayTemplate" width="25" height="23"/>
         <image name="NSRefreshTemplate" width="11" height="15"/>
         <image name="NXHelpIndex" width="61" height="46"/>
