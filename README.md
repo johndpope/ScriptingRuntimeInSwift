@@ -83,8 +83,8 @@ And the SeaTurtle runtime environment should have:
 
 ## Authorship and License
 
-SeaTurtle is written by David Kopec and released under the GNU GPL Version 3.
+SeaTurtle is written by David Kopec and dual-licensed under the GNU GPL Version 3 and a proprietary license.
 
 ## Contributing
 
-Contributors should know that I plan to sell an inexpensive commercial version of SeaTurtle on the Mac App Store, and should be comfortable with their contributions being used by me for-profit. All contributions to SeaTurtle must be released under the GPL and copyright must be assigned to me as the creator of SeaTurtle. This is laid out in the pull-request template. This is to ensure no ambiguity ([see FSF](https://www.gnu.org/licenses/gpl-faq.en.html#AssignCopyright) for more information on the copyright assignment issue).
+Contributors should know that I plan to sell an inexpensive commercial version of SeaTurtle on the Mac App Store, and should be comfortable with their contributions being used by me for-profit. All contributions to SeaTurtle must have their copyright assigned to me as the creator of SeaTurtle in order for me to be able to dual license it. This is laid out in the pull-request template. This is to ensure no ambiguity ([see FSF](https://www.gnu.org/licenses/gpl-faq.en.html#AssignCopyright) for more information on the copyright assignment issue).
