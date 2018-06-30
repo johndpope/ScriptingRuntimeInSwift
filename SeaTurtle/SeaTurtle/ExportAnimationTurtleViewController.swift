@@ -8,6 +8,7 @@
 
 import Cocoa
 import SeaTurtleEngine
+import SpriteKit
 
 class ExportAnimationTurtleViewController: TurtleViewController {
     
@@ -19,6 +20,22 @@ class ExportAnimationTurtleViewController: TurtleViewController {
         super.viewDidLoad()
         // Do view setup here.
         print("ExportAnimatedTurtleViewController viewDidLoad")
+    }
+    // completion runs on another thread
+    func stepWithCompletion(_ completion: @escaping () -> Void) {
+        if !steps.isEmpty {
+            turtle.isPaused = false
+            stopPlay = true
+            //print(steps.count)
+            let (step, range) = steps.removeFirst()
+            stepDelegate?.willStep(range: range)
+            step.duration = stepTime
+            turtle.run(step) {
+                completion()
+            }
+        } else {
+            stepDelegate?.doneStepping()
+        }
     }
     
     override func changePen(down: Bool, penChange: PenChange) {

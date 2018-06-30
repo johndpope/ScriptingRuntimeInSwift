@@ -22,18 +22,16 @@ struct AnimatedGIF {
         // based on Apple example code
         // https://developer.apple.com/library/archive/documentation/GraphicsImaging/Conceptual/ImageIOGuide/ikpg_dest/ikpg_dest.html#//apple_ref/doc/uid/TP40005462-CH219-SW3
         
-        let fileProperties = NSMutableDictionary()
-        fileProperties.setObject(kCGImagePropertyGIFDictionary, forKey: NSDictionary(dictionary: [kCGImagePropertyGIFLoopCount: loop]))
-        
-        let frameProperties = NSMutableDictionary()
-        frameProperties.setObject(kCGImagePropertyGIFDictionary, forKey: NSDictionary(dictionary: [kCGImagePropertyGIFUnclampedDelayTime: delay]))
+        let fileProperties: CFDictionary = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: loop]]  as CFDictionary
+        let frameProperties: CFDictionary = [kCGImagePropertyGIFDictionary as String: [(kCGImagePropertyGIFDelayTime as String): delay]] as CFDictionary
+
         
         let url = destinationURL as CFURL
-        guard let destination = CGImageDestinationCreateWithURL(url, kUTTypePNG, images.count, nil) else {
+        guard let destination = CGImageDestinationCreateWithURL(url, kUTTypeGIF, images.count, nil) else {
             print("Could not create destination for \(images.count) frames of GIF at \(url)")
             return
         }
-        CGImageDestinationSetProperties(destination, frameProperties)
+        CGImageDestinationSetProperties(destination, fileProperties)
         
         for image in images {
             CGImageDestinationAddImage(destination, image, frameProperties)

@@ -82,6 +82,7 @@ class TurtleViewController: NSViewController, TurtlePlayer {
         
         // reset turtle, lines
         clear()
+        print("TurtleViewController viewDidLoad")
     }
     
     private func resetTurtle() {

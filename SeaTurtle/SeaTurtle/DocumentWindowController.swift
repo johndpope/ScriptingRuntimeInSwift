@@ -60,6 +60,12 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
                 //print("I'm prepared")
                 
             }
+        } else if segue.identifier?.rawValue == "Export Animated Segue" {
+            guard let eavc: ExportAnimatedViewController = segue.destinationController as? ExportAnimatedViewController else {
+                print("Destination is not the right type: ExportedAnimatedViewController expected")
+                return
+            }
+            eavc.docRep = document.docRep
         }
     }
     
