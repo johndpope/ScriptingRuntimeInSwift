@@ -10,4 +10,4 @@ Please digitially sign your name by adding it via a pull request to the contribu
 
 Contributors:
 - David Kopec
-- Batarian71(Logo Designer)  
+- Mahmut Aşkın(Logo Designer)  
