@@ -18,6 +18,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import Cocoa
+import SpriteKit
 import SeaTurtleEngine
 
 class Document: NSDocument {
@@ -74,6 +75,49 @@ class Document: NSDocument {
         //let j = String(data: data, encoding: String.Encoding.utf8)!
         //Swift.print(j)
         docRep.text = NSString(data: data, encoding: String.Encoding.utf8.rawValue)!
+    }
+    
+    override func printDocument(_ sender: Any?) {
+        guard let window = self.windowControllers[0].window else { return }
+        let alert: NSAlert = NSAlert()
+        alert.messageText = "What do you want to print?"
+        alert.informativeText = "The code or the picture?"
+        alert.addButton(withTitle: "Cancel")
+        alert.addButton(withTitle: "Source Code")
+        alert.addButton(withTitle: "Turtle Graphics")
+        alert.beginSheetModal(for: window) { (response) in
+            if response == NSApplication.ModalResponse.alertFirstButtonReturn { // cancel
+                return
+            } else if response == NSApplication.ModalResponse.alertSecondButtonReturn { // code
+                guard let attrstr = self.scvc?.textView.attributedString() else { return }
+                let printInfo: NSPrintInfo = self.printInfo
+                let bounds: NSRect = printInfo.imageablePageBounds
+                let textView: NSTextView = NSTextView(frame: bounds)
+                textView.textStorage?.append(attrstr)
+                //textView.printView(self)
+                self.scvc?.textView.printView(self)
+                return
+            } else { // picture
+                guard let skview = self.tvc?.view as? SKView else {
+                    Swift.print("Invalid skview")
+                    return
+                }
+                guard let texture: SKTexture = skview.texture(from: (self.tvc?.scene!)!) else {
+                    Swift.print("Invalid texture")
+                    return
+                }
+                let image = texture.cgImage()
+                let printInfo: NSPrintInfo = self.printInfo
+                printInfo.isVerticallyCentered = true
+                let bounds: NSRect = printInfo.imageablePageBounds
+                let nsimage: NSImage = NSImage(cgImage: image, size: NSSize(width: bounds.width, height: bounds.height))
+                let imageView: NSImageView = NSImageView(image: nsimage)
+                imageView.frame = bounds
+                let printOperation: NSPrintOperation = NSPrintOperation(view: imageView, printInfo: printInfo)
+                printOperation.run()
+                //return
+            }
+        }
     }
     
     @IBAction func runSeaTurtleScript(sender: NSToolbarItem) {
