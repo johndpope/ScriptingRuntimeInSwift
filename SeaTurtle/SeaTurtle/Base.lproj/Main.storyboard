@@ -1327,6 +1327,9 @@ Gw
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="puC-ew-SmG">
                                 <rect key="frame" x="147" y="6" width="87" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="83" id="gxD-Fk-xjq"/>
+                                </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="pNX-vH-VTb">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
