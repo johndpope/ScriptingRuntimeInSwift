@@ -1,8 +1,0 @@
-repeat 4
-  set x 1
-  repeat 100
-    forward 10
-    right 100-x
-    set x x+1
-  end
-end
